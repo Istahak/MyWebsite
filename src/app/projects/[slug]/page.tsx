@@ -1,8 +1,25 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { projects } from "@/data/projects";
 import type { Metadata } from "next";
+
+interface TechCategory {
+  category: string;
+  technologies: string[];
+}
+
+interface ProjectDetails {
+  overview?: string;
+  challenge?: string;
+  solution?: string;
+  features?: string[];
+  lessons?: string[];
+  techStack?: TechCategory[];
+  challenges?: string[];
+  learnings?: string[];
+  futureEnhancements?: string[];
+  [key: string]: unknown;
+}
 
 interface ProjectPageProps {
   params: Promise<{
@@ -46,7 +63,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   }
 
   // Dynamically import project details
-  let projectDetails: any = null;
+  let projectDetails: ProjectDetails | null = null;
   try {
     if (project.detailsFile) {
       const detailsModule = await import(
@@ -62,7 +79,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         detailsModule.default ||
         detailsModule[Object.keys(detailsModule)[0]];
     }
-  } catch (error) {
+  } catch {
     console.log(`Details file not found for project: ${project.detailsFile}`);
   }
 
@@ -179,7 +196,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   Key Features
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {projectDetails.features.map(
+                  {projectDetails.features?.map(
                     (feature: string, index: number) => (
                       <div
                         key={index}
@@ -200,7 +217,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   Lessons Learned
                 </h2>
                 <div className="space-y-3">
-                  {projectDetails.lessons.map(
+                  {projectDetails.lessons?.map(
                     (lesson: string, index: number) => (
                       <div
                         key={index}
@@ -276,7 +293,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   </h3>
                   <div className="space-y-4">
                     {projectDetails.techStack.map(
-                      (category: any, index: number) => (
+                      (category: TechCategory, index: number) => (
                         <div key={index}>
                           <h4 className="font-medium text-gray-900 dark:text-white mb-2">
                             {category.category}

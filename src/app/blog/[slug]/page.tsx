@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { blogPosts } from "@/data/blog";
 
 // Define the BlogDetail interface here since it's used across multiple files
@@ -324,12 +325,12 @@ export default async function BlogPost({ params }: BlogPageProps) {
 
         {/* Back to Blog Link */}
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <a
+          <Link
             href="/blog"
             className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
           >
             ← Back to Blog
-          </a>
+          </Link>
         </div>
       </div>
     </div>

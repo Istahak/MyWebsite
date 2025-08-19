@@ -141,16 +141,17 @@ export default function ProjectsPage() {
     },
   ];
 
-  const categories = [
-    "All",
-    "Web Development",
-    "Educational",
-    "Competitive Programming",
-    "Productivity",
-    "Automation",
-    "Blogging",
-  ];
-  const statuses = ["All", "Completed", "In Progress", "Planning"];
+  // These are placeholders for future filtering functionality
+  // const categories = [
+  //   "All",
+  //   "Web Development",
+  //   "Educational",
+  //   "Competitive Programming",
+  //   "Productivity",
+  //   "Automation",
+  //   "Blogging",
+  // ];
+  // const statuses = ["All", "Completed", "In Progress", "Planning"];
 
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
