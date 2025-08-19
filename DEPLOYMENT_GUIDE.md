@@ -41,6 +41,7 @@ git push -u origin main
 ## Step 4: Your Live Portfolio
 
 After deployment, you'll get:
+
 - **Live URL:** `https://your-portfolio-name.vercel.app`
 - **Auto-deployment:** Every push to GitHub triggers new deployment
 - **Custom domain:** Optional - you can add your own domain later
@@ -48,6 +49,7 @@ After deployment, you'll get:
 ## Step 5: Update Contact Form (if needed)
 
 Since you're using Formspree with form ID `xyzpqklg`, make sure:
+
 1. Your Formspree account email matches: `sistahak900@gmail.com`
 2. The form ID `xyzpqklg` is active in your Formspree dashboard
 3. Test the contact form after deployment
