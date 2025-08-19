@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects - Your Name",
+  title: "Projects - Istahak Islam",
   description:
-    "Explore my portfolio of web development projects, competitive programming tools, and educational applications.",
+    "Explore Istahak Islam's portfolio of web development projects, competitive programming tools, and educational applications.",
 };
 
 export default function ProjectsPage() {

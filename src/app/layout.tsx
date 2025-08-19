@@ -15,10 +15,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name - CSE Portfolio",
+  title: "Istahak's Portfolio",
   description:
-    "Portfolio of a Computer Science and Engineering student from University of Dhaka, showcasing projects and competitive programming achievements.",
+    "Portfolio of Istahak Islam, a Computer Science and Engineering student from University of Dhaka, showcasing projects and competitive programming achievements.",
   keywords: [
+    "Istahak Islam",
     "CSE",
     "Computer Science",
     "University of Dhaka",
@@ -26,11 +27,11 @@ export const metadata: Metadata = {
     "Portfolio",
     "Software Development",
   ],
-  authors: [{ name: "Your Name" }],
+  authors: [{ name: "Istahak Islam" }],
   openGraph: {
-    title: "Your Name - CSE Portfolio",
+    title: "Istahak's Portfolio",
     description:
-      "Portfolio of a Computer Science and Engineering student from University of Dhaka",
+      "Portfolio of Istahak Islam, a Computer Science and Engineering student from University of Dhaka",
     type: "website",
   },
 };

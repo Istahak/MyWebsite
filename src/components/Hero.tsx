@@ -73,7 +73,7 @@ const Hero = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
-                6+
+                10+
               </div>
               <div className="text-gray-600 dark:text-gray-300">
                 Projects Built
