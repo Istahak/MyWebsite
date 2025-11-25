@@ -22,6 +22,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
+    { name: "Achievements", href: "/achievements" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -32,10 +33,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200/20 dark:border-gray-700/20" 
+        scrolled
+          ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200/20 dark:border-gray-700/20"
           : "bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm"
       }`}
     >
@@ -54,9 +55,6 @@ const Navbar = () => {
                 <span className="font-bold text-xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
                   Istahak Islam
                 </span>
-                <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                  Software Developer
-                </div>
               </div>
             </Link>
           </div>
@@ -99,9 +97,17 @@ const Navbar = () => {
                 strokeWidth={2}
               >
                 {isOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
@@ -109,10 +115,10 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div 
+        <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
-            isOpen 
-              ? "max-h-96 opacity-100" 
+            isOpen
+              ? "max-h-96 opacity-100"
               : "max-h-0 opacity-0 pointer-events-none"
           }`}
         >
