@@ -1,4 +1,4 @@
-export default {
+const achievementDetails = {
   overview:
     "The National Collegiate Programming Contest (NCPC) 2023 was one of the most challenging competitions of the year, bringing together the brightest minds from universities across Bangladesh. Our team represented the University of Dhaka with pride and determination.",
   highlights: [
@@ -21,3 +21,5 @@ export default {
   reflection:
     "NCPC 2023 was a transformative experience that taught us the importance of preparation, teamwork, and resilience. While we didn't finish at the very top, securing 26th position among Bangladesh's finest programming teams was an achievement we're proud of. The competition exposed us to new problem-solving techniques and reinforced the value of consistent practice. Every problem we attempted, whether solved or not, contributed to our growth as programmers and team players.",
 };
+
+export default achievementDetails;

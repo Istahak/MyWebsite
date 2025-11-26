@@ -1,4 +1,4 @@
-export default {
+const achievementDetails = {
   overview:
     "The Samsung R&D Institute Bangladesh Code Contest 2025 was a unique opportunity to compete in an industry-sponsored competition, testing skills in problem-solving approaches valued by leading technology companies. Securing 9th place in the onsite round was both an achievement and a learning experience that bridged the gap between academic competitive programming and industry expectations.",
   highlights: [
@@ -22,3 +22,5 @@ export default {
   reflection:
     "The Samsung Code Contest 2025 was more than just a competition - it was a glimpse into the intersection of competitive programming and professional software development. Finishing 9th among Bangladesh's talented programmers was gratifying, but the real value came from understanding how industry evaluates coding skills. The problems challenged us to think beyond algorithmic complexity to consider code quality, maintainability, and practical implementation. Interacting with Samsung R&D professionals provided valuable insights into career paths and industry expectations. This experience reinforced that competitive programming skills translate directly into professional capabilities, and motivated me to continue developing both my algorithmic knowledge and software engineering practices.",
 };
+
+export default achievementDetails;

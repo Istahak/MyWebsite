@@ -1,4 +1,4 @@
-export default {
+const achievementDetails = {
   overview:
     "The KUET Inter University Programming Contest 2025 brought together talented teams from across Bangladesh for an intense day of algorithmic problem-solving. Team DU_Oblivion continued to demonstrate consistent performance and improvement, securing a solid top-20 finish in this highly competitive event.",
   highlights: [
@@ -22,3 +22,5 @@ export default {
   reflection:
     "KUET IUPC 2025 was another valuable stepping stone in our competitive programming journey. Securing 20th position demonstrated our ability to compete consistently at a high level. The contest challenged us with interesting problems that required both theoretical knowledge and practical implementation skills. Each competition teaches us something new, and this one reinforced the importance of staying calm, communicating clearly, and trusting our preparation. We're grateful for the experience and motivated to continue improving.",
 };
+
+export default achievementDetails;

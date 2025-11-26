@@ -1,4 +1,4 @@
-export default {
+const achievementDetails = {
   overview:
     "The ICPC Asia Dhaka Regional Contest 2024 represents the pinnacle of competitive programming in our region. As one of the most prestigious programming competitions globally, the ICPC attracts the best university teams from across Asia and the world. Representing the University of Dhaka at this level was both an honor and a significant challenge.",
   highlights: [
@@ -23,3 +23,5 @@ export default {
   reflection:
     "Participating in the ICPC Asia Dhaka Regional Contest 2024 was a dream come true and a humbling experience. Competing at this level showed us how much we've grown and how much further we can go. The problems challenged us in ways we hadn't experienced before, pushing us to think creatively and apply our knowledge in novel ways. While our 37th position reflects the intense competition, it also represents countless hours of preparation and the strong bond we've built as a team. This experience has motivated us to train harder and aim even higher in future competitions.",
 };
+
+export default achievementDetails;

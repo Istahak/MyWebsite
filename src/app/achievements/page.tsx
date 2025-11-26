@@ -13,8 +13,8 @@ export default function AchievementsPage() {
   const featuredAchievements = achievements.filter((a) => a.featured);
   const otherAchievements = achievements.filter((a) => !a.featured);
 
-  // Get all unique categories
-  const categories = Array.from(new Set(achievements.map((a) => a.category)));
+  // Get all unique categories (for future filtering functionality)
+  // const categories = Array.from(new Set(achievements.map((a) => a.category)));
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -59,7 +59,10 @@ export default function AchievementsPage() {
           </div>
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
             <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
-              {new Set(achievements.map((a) => a.teamName).filter(Boolean)).size}
+              {
+                new Set(achievements.map((a) => a.teamName).filter(Boolean))
+                  .size
+              }
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               Teams Represented
@@ -75,7 +78,10 @@ export default function AchievementsPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredAchievements.map((achievement) => (
-                <AchievementCard key={achievement.id} achievement={achievement} />
+                <AchievementCard
+                  key={achievement.id}
+                  achievement={achievement}
+                />
               ))}
             </div>
           </section>
@@ -89,7 +95,10 @@ export default function AchievementsPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {otherAchievements.map((achievement) => (
-                <AchievementCard key={achievement.id} achievement={achievement} />
+                <AchievementCard
+                  key={achievement.id}
+                  achievement={achievement}
+                />
               ))}
             </div>
           </section>
@@ -99,7 +108,11 @@ export default function AchievementsPage() {
   );
 }
 
-function AchievementCard({ achievement }: { achievement: typeof achievements[0] }) {
+function AchievementCard({
+  achievement,
+}: {
+  achievement: (typeof achievements)[0];
+}) {
   return (
     <Link href={`/achievements/${achievement.id}`}>
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col">
@@ -166,11 +179,13 @@ function AchievementCard({ achievement }: { achievement: typeof achievements[0] 
                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-            <span>{new Date(achievement.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}</span>
+            <span>
+              {new Date(achievement.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
           </div>
 
           {/* Description */}
