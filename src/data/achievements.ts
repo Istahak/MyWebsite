@@ -119,4 +119,21 @@ export const achievements: Achievement[] = [
     featured: true,
     detailsFile: "samsung-code-contest-2025.ts",
   },
+  {
+    id: "cuet-iupc-2025",
+    title: "IUPC CUET 2025 – inCSEption",
+    date: "2026-01-15",
+    teamName: "DU Odyssey",
+    rank: 6,
+    category: "Programming Contest",
+    organizer: "Chittagong University of Engineering & Technology",
+    location: "CUET, Chittagong",
+    description:
+      "Excited to share that our team, DU Odyssey, secured 6th position at the IUPC CUET 2025 – inCSEption! 🎉💻 We solved multiple challenging problems, showcasing teamwork, consistency, and problem-solving under pressure. The contest brought together talented programmers from universities across Bangladesh, testing our skills in algorithms, data structures, and competitive programming strategies. Grateful for the learning experience and proud of the team's effort. On to the next challenge! 🚀",
+    image: "/image/achievements/cuet-iupc-2025.jpg",
+    officialLink: "https://toph.co/c/cuet-iupc-2025/standings",
+    tags: ["IUPC", "CUET", "Top 10", "Competitive Programming"],
+    featured: true,
+    detailsFile: "cuet-iupc-2025.ts",
+  },
 ];

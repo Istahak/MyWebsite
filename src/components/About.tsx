@@ -149,7 +149,7 @@ const About = () => {
                     2021 - 2025 (Expected)
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Current CGPA: 3.82/4.00
+                    Current CGPA: 3.80/4.00
                   </p>
                 </div>
               </div>
@@ -218,7 +218,7 @@ const About = () => {
                     AtCoder
                   </span>
                   <span className="text-cyan-600 dark:text-cyan-400 font-medium">
-                    Cyan • (Max Rating 1464)
+                    Cyan • (Max Rating 1571)
                   </span>
                 </a>
                 <a

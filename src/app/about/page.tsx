@@ -61,7 +61,7 @@ export default function AboutPage() {
                   2021 - 2025 (Expected)
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mt-2">
-                  CGPA: 3.82/4.00
+                  CGPA: 3.80/4.00
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mt-2">
                   Relevant Coursework: Data Structures & Algorithms, Database
