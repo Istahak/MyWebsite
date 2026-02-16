@@ -10,7 +10,8 @@ export const personalInfo = {
   bio: "Passionate about competitive programming and software development. Building innovative solutions and sharing knowledge through technical blogs.",
   location: "Dhaka, Bangladesh",
   status: "Final Year Student",
-  looking: "Software Engineering Opportunities"
+  looking: "Software Engineering Opportunities",
+  resumePath: "/resume.pdf"
 };
 
 export const skills = {
