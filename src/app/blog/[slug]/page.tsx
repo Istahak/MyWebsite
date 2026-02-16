@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { blogPosts } from "@/data/blog";
+import MarkdownContent from "@/components/MarkdownContent";
 
 // Define the BlogDetail interface here since it's used across multiple files
 export interface BlogDetail {
@@ -193,10 +194,9 @@ export default async function BlogPost({ params }: BlogPageProps) {
                 )}
 
               {/* Main Content */}
-              <div
-                className="mb-8"
-                dangerouslySetInnerHTML={{ __html: blogDetail.content }}
-              />
+              <div className="mb-8">
+                <MarkdownContent content={blogDetail.content} />
+              </div>
 
               {/* Code Examples */}
               {blogDetail.codeExamples &&
