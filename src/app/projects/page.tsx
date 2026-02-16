@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { projects } from "@/data/projects";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Projects - Istahak Islam",
@@ -7,139 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const projects = [
-    {
-      id: 1,
-      title: "Task Management System",
-      description:
-        "A comprehensive full-stack web application for project and task management with real-time collaboration features. Users can create projects, assign tasks, track progress, and communicate with team members in real-time.",
-      longDescription:
-        "Built with modern web technologies, this application features user authentication, real-time updates using WebSockets, file uploads, notifications, and a responsive dashboard. The backend API is built with Node.js and Express, while the frontend uses React with Redux for state management.",
-      tech: [
-        "React",
-        "Node.js",
-        "Express",
-        "MongoDB",
-        "Socket.io",
-        "Redux",
-        "JWT",
-        "Cloudinary",
-      ],
-      github: "https://github.com/yourusername/task-management",
-      live: "https://taskmanager-demo.vercel.app",
-      category: "Web Development",
-      featured: true,
-      status: "Completed",
-    },
-    {
-      id: 2,
-      title: "Algorithm Visualizer",
-      description:
-        "An interactive web application that visualizes various sorting algorithms and data structures to help students understand how they work step by step.",
-      longDescription:
-        "This educational tool provides animated visualizations for sorting algorithms (Bubble Sort, Quick Sort, Merge Sort, etc.) and data structures (Binary Trees, Graphs, etc.). Users can adjust speed, input custom data, and see detailed explanations of each step.",
-      tech: ["React", "TypeScript", "D3.js", "Tailwind CSS", "Framer Motion"],
-      github: "https://github.com/yourusername/algo-visualizer",
-      live: "https://algo-viz-demo.vercel.app",
-      category: "Educational",
-      featured: true,
-      status: "Completed",
-    },
-    {
-      id: 3,
-      title: "CP Problem Tracker",
-      description:
-        "A personal dashboard to track competitive programming progress across multiple platforms like Codeforces, CodeChef, and AtCoder.",
-      longDescription:
-        "This application fetches data from various competitive programming platforms and provides comprehensive analytics including problem-solving streaks, category-wise progress, rating changes, and upcoming contests. Features include goal setting, progress visualization, and performance comparisons.",
-      tech: [
-        "Next.js",
-        "Python",
-        "PostgreSQL",
-        "Chart.js",
-        "API Integration",
-        "Cron Jobs",
-      ],
-      github: "https://github.com/yourusername/cp-tracker",
-      live: "https://cp-tracker-demo.vercel.app",
-      category: "Competitive Programming",
-      featured: true,
-      status: "Completed",
-    },
-    {
-      id: 4,
-      title: "University Course Planner",
-      description:
-        "A web application to help university students plan their academic courses and track graduation requirements efficiently.",
-      longDescription:
-        "Students can input their completed courses, view remaining requirements, plan future semesters, and get recommendations for course sequences. The app includes GPA calculation, prerequisite checking, and semester planning tools.",
-      tech: ["Vue.js", "Firebase", "Vuetify", "PWA", "Cloud Functions"],
-      github: "https://github.com/yourusername/course-planner",
-      category: "Educational",
-      featured: false,
-      status: "Completed",
-    },
-    {
-      id: 5,
-      title: "Code Snippet Manager",
-      description:
-        "A personal code snippet organizer with syntax highlighting, tagging, and powerful search functionality for developers.",
-      longDescription:
-        "Developers can save, organize, and quickly find code snippets with features like syntax highlighting for 20+ languages, tag-based organization, full-text search, and snippet sharing. Perfect for maintaining a personal library of useful code.",
-      tech: ["React", "Express", "MongoDB", "Prism.js", "Elasticsearch"],
-      github: "https://github.com/yourusername/snippet-manager",
-      category: "Productivity",
-      featured: false,
-      status: "Completed",
-    },
-    {
-      id: 6,
-      title: "Weather Dashboard",
-      description:
-        "A beautiful weather application with detailed forecasts, historical data, and location-based services.",
-      longDescription:
-        "Features current weather, 7-day forecasts, weather maps, severe weather alerts, and historical weather data. The app uses geolocation for automatic location detection and supports multiple cities with a clean, intuitive interface.",
-      tech: [
-        "JavaScript",
-        "Chart.js",
-        "OpenWeather API",
-        "Mapbox",
-        "Local Storage",
-      ],
-      github: "https://github.com/yourusername/weather-dashboard",
-      live: "https://weather-dashboard-demo.vercel.app",
-      category: "Web Development",
-      featured: false,
-      status: "Completed",
-    },
-    {
-      id: 7,
-      title: "Competitive Programming Blog",
-      description:
-        "A technical blog platform specifically designed for sharing competitive programming tutorials and problem solutions.",
-      longDescription:
-        "Built with Next.js and MDX, this blog platform features syntax-highlighted code blocks, mathematical notation support, interactive problem examples, and a comment system. Perfect for sharing algorithmic insights and tutorials.",
-      tech: ["Next.js", "MDX", "Tailwind CSS", "Prism.js", "KaTeX"],
-      github: "https://github.com/yourusername/cp-blog",
-      live: "https://cp-blog-demo.vercel.app",
-      category: "Blogging",
-      featured: false,
-      status: "In Progress",
-    },
-    {
-      id: 8,
-      title: "Contest Reminder Bot",
-      description:
-        "A Discord bot that sends notifications about upcoming competitive programming contests from various platforms.",
-      longDescription:
-        "This bot fetches contest information from Codeforces, CodeChef, AtCoder, and other platforms, then sends reminders to Discord servers. Features include custom reminder times, platform filtering, and timezone support.",
-      tech: ["Python", "Discord.py", "BeautifulSoup", "SQLite", "Cron"],
-      github: "https://github.com/yourusername/contest-bot",
-      category: "Automation",
-      featured: false,
-      status: "Completed",
-    },
-  ];
 
   // These are placeholders for future filtering functionality
   // const categories = [
@@ -175,7 +44,7 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-md">
             <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-              8+
+              {projects.length}
             </div>
             <div className="text-gray-600 dark:text-gray-300">
               Total Projects
@@ -183,19 +52,19 @@ export default function ProjectsPage() {
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-md">
             <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-              6
+              {projects.filter(p => p.status === "Completed").length}
             </div>
             <div className="text-gray-600 dark:text-gray-300">Completed</div>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-md">
             <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-              10+
+              {[...new Set(projects.flatMap(p => p.tech))].length}
             </div>
             <div className="text-gray-600 dark:text-gray-300">Technologies</div>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-md">
             <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
-              5
+              {[...new Set(projects.map(p => p.category))].length}
             </div>
             <div className="text-gray-600 dark:text-gray-300">Categories</div>
           </div>
@@ -208,9 +77,10 @@ export default function ProjectsPage() {
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {featuredProjects.map((project) => (
-              <div
+              <Link
                 key={project.id}
-                className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                href={`/projects/${project.slug}`}
+                className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 block"
               >
                 {/* Project Image Placeholder */}
                 <div className="h-48 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
@@ -309,7 +179,7 @@ export default function ProjectsPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -321,9 +191,10 @@ export default function ProjectsPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {otherProjects.map((project) => (
-              <div
+              <Link
                 key={project.id}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300"
+                href={`/projects/${project.slug}`}
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 block"
               >
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -366,26 +237,11 @@ export default function ProjectsPage() {
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
-                  >
-                    View Code →
-                  </a>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-green-600 dark:text-green-400 hover:underline text-sm font-medium"
-                    >
-                      Live Demo →
-                    </a>
-                  )}
+                  <span className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">
+                    View Details →
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
