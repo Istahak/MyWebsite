@@ -1,12 +1,7 @@
-import type { Metadata } from "next";
+"use client";
+
 import { projects } from "@/data/projects";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Projects - Istahak Islam",
-  description:
-    "Explore Istahak Islam's portfolio of web development projects, competitive programming tools, and educational applications.",
-};
 
 export default function ProjectsPage() {
 
@@ -144,6 +139,7 @@ export default function ProjectsPage() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
                       >
                         <svg
@@ -159,6 +155,7 @@ export default function ProjectsPage() {
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
                         >
                           <svg

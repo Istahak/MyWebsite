@@ -80,7 +80,7 @@ export default async function AchievementDetailPage({
               src={achievement.image}
               alt={achievement.title}
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
