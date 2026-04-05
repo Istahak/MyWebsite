@@ -2,9 +2,12 @@
 
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import rehypeHighlight from 'rehype-highlight';
+import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import 'highlight.js/styles/atom-one-dark.css';
+import 'katex/dist/katex.min.css';
 
 interface MarkdownContentProps {
   content: string;
@@ -37,8 +40,8 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
         }
       `}</style>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeHighlight, rehypeRaw]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
         components={{
           h1: ({ ...props }) => (
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mt-12 mb-6 pb-3 border-b-2 border-blue-500 dark:border-blue-400" {...props} />

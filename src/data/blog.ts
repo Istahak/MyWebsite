@@ -57,5 +57,19 @@ export const blogPosts: BlogPost[] = [
     published: true,
     detailsFile: "suffix-automaton",
     author: "Istahak Islam"
+  },
+  {
+    id: 4,
+    title: "Solving the Dynamic Tree Diameter Problem: An Elegant Approach using Euler Tours and Segment Trees",
+    excerpt: "A practical breakdown of maintaining tree diameter under edge-weight updates using Euler Tour flattening and Segment Tree with lazy propagation, with full C++ implementation.",
+    date: "2026-04-05",
+    readTime: "18 min read",
+    tags: ["Tree", "Segment Tree", "Euler Tour", "LCA", "Codeforces", "Advanced"],
+    slug: "dynamic-tree-diameter",
+    category: "Tutorial",
+      featured: true,
+    published: true,
+    detailsFile: "dynamic-tree-diameter",
+    author: "Istahak Islam"
   }
 ];

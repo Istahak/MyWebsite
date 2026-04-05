@@ -37,6 +37,16 @@ interface BlogPageProps {
   params: Promise<{ slug: string }>;
 }
 
+const detailLoaders: Record<string, () => Promise<BlogDetail>> = {
+  "dp-on-trees": async () => (await import("@/data/blog-details/dp-on-trees")).default,
+  "suffix-array-notes": async () =>
+    (await import("@/data/blog-details/suffix-array-notes")).default,
+  "suffix-automaton": async () =>
+    (await import("@/data/blog-details/suffix-automaton")).default,
+  "dynamic-tree-diameter": async () =>
+    (await import("@/data/blog-details/dynamic-tree-diameter")).default,
+};
+
 // Generate static paths for all blog posts
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -91,19 +101,9 @@ export default async function BlogPost({ params }: BlogPageProps) {
 
   if (post.detailsFile) {
     try {
-      const detailModule = await import(
-        `@/data/blog-details/${post.detailsFile}`
-      );
-
-      // Get the correct export based on the filename
-      const exportName = Object.keys(detailModule).find(
-        (key) =>
-          key.toLowerCase().includes("details") ||
-          key.toLowerCase().includes(post.detailsFile?.replace(/-/g, "") || "")
-      );
-
-      if (exportName) {
-        blogDetail = detailModule[exportName];
+      const loadDetail = detailLoaders[post.detailsFile];
+      if (loadDetail) {
+        blogDetail = await loadDetail();
       }
     } catch (error) {
       console.error(
