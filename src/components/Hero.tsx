@@ -30,10 +30,17 @@ const Hero = () => {
               Istahak Islam
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Computer Science & Engineering Student
+              Software Engineer
             </p>
             <p className="text-lg md:text-xl text-blue-600 dark:text-blue-400 font-medium">
-              University of Dhaka
+              <a
+                href="https://www.enosisbd.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Enosis Solutions BD
+              </a>
             </p>
           </div>
 
@@ -81,9 +88,9 @@ const Hero = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-green-600 dark:text-green-400">
-                Final
+                Mar 2026
               </div>
-              <div className="text-gray-600 dark:text-gray-300">Semester</div>
+              <div className="text-gray-600 dark:text-gray-300">Joined Enosis</div>
             </div>
           </div>
 

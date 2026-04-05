@@ -23,12 +23,13 @@ const About = () => {
                 Hello, I'm Istahak Islam!
               </h3>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                I'm a final-year Computer Science and Engineering student at the
-                University of Dhaka, with a deep passion for competitive
-                programming and software development. Throughout my academic
-                journey, I've solved over 2000+ programming problems across
-                various platforms like Codeforces, AtCoder, CodeChef, and
-                LeetCode, and participated in numerous programming contests.
+                I recently completed my undergraduate degree in Computer Science
+                and Engineering from the University of Dhaka. Currently, I am
+                working as a Software Engineer at Enosis Solutions
+                BD, while continuing my journey in competitive programming and
+                software development. Over the years, I have solved 2000+
+                problems across platforms like Codeforces, AtCoder, CodeChef,
+                and LeetCode, and participated in many programming contests.
               </p>
             </div>
             <div>
@@ -68,7 +69,35 @@ const About = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  Completing my final semester at University of Dhaka
+                  Working as Software Engineer at Enosis Solutions BD
+                </li>
+                <li className="flex items-center">
+                  <svg
+                    className="w-5 h-5 text-green-500 mr-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Working with HTML, CSS, JavaScript, C#, and .NET Core MVC
+                </li>
+                <li className="flex items-center">
+                  <svg
+                    className="w-5 h-5 text-green-500 mr-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Following a hybrid work model while improving engineering fundamentals
                 </li>
                 <li className="flex items-center">
                   <svg
@@ -96,35 +125,7 @@ const About = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  Exploring research opportunities in Machine Learning
-                </li>
-                <li className="flex items-center">
-                  <svg
-                    className="w-5 h-5 text-green-500 mr-3"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Looking for software engineering opportunities
-                </li>
-                <li className="flex items-center">
-                  <svg
-                    className="w-5 h-5 text-green-500 mr-3"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Writing technical blogs about programming
+                  Writing technical blogs about programming and problem solving
                 </li>
               </ul>
             </div>
@@ -132,6 +133,29 @@ const About = () => {
 
           {/* Image/Stats Side */}
           <div className="space-y-8">
+            <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-700 dark:to-gray-600 p-6 rounded-lg">
+              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                Current Role
+              </h4>
+              <div className="space-y-2">
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="font-medium">Position:</span> Software Engineer
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="font-medium">Company:</span> Enosis Solutions BD
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="font-medium">Joined:</span> March 2026
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="font-medium">Work Model:</span> Hybrid
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  <span className="font-medium">Working With:</span> HTML, CSS, JavaScript, C#, .NET Core MVC
+                </p>
+              </div>
+            </div>
+
             {/* Education */}
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 p-6 rounded-lg">
               <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -146,7 +170,7 @@ const About = () => {
                     University of Dhaka
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    2021 - 2025 (Expected)
+                    2021 - 2025
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     Current CGPA: 3.80/4.00

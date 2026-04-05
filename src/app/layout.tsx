@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Istahak's Portfolio",
   description:
-    "Portfolio of Istahak Islam, a Computer Science and Engineering student from University of Dhaka, showcasing projects and competitive programming achievements.",
+    "Portfolio of Istahak Islam, a Software Engineer at Enosis Solutions BD and CSE graduate from University of Dhaka, showcasing projects and competitive programming achievements.",
   keywords: [
     "Istahak Islam",
     "CSE",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Istahak's Portfolio",
     description:
-      "Portfolio of Istahak Islam, a Computer Science and Engineering student from University of Dhaka",
+      "Portfolio of Istahak Islam, Software Engineer at Enosis Solutions BD and CSE graduate from University of Dhaka",
     type: "website",
   },
 };

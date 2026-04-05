@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Md Istahak Islam",
-  title: "Computer Science & Engineering Student",
+  title: "Software Engineer",
   university: "University of Dhaka",
   email: "sistahak900@gmail.com",
   github: "https://github.com/Istahak",
@@ -9,8 +9,8 @@ export const personalInfo = {
   leetcode: "https://leetcode.com/u/_0Istahak/",
   bio: "Passionate about competitive programming and software development. Building innovative solutions and sharing knowledge through technical blogs.",
   location: "Dhaka, Bangladesh",
-  status: "Final Year Student",
-  looking: "Software Engineering Opportunities",
+  status: "Software Engineer at Enosis Solutions BD",
+  looking: "Open to impactful software engineering roles and collaborations",
   resumePath: "/resume.pdf"
 };
 
@@ -70,7 +70,7 @@ export const competitiveProgramming = {
 export const education = {
   degree: "Bachelor of Science in Computer Science and Engineering",
   university: "University of Dhaka",
-  duration: "2021 - 2025 (Expected)",
+  duration: "2021 - 2025",
   relevantCourses: [
     "Data Structures & Algorithms",
     "Database Systems",
@@ -84,6 +84,12 @@ export const education = {
 };
 
 export const experience = [
+  {
+    title: "Software Engineer",
+    organization: "Enosis Solutions BD",
+    duration: "March 2026 - Present",
+    description: "Working with HTML, CSS, JavaScript, C#, and .NET Core MVC while adapting to a hybrid work model."
+  },
   {
     title: "Competitive Programming Mentor",
     organization: "University Programming Club",

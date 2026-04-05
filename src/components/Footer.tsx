@@ -11,9 +11,9 @@ const Footer = () => {
               About Me
             </h3>
             <p className="text-gray-600 dark:text-gray-300 text-sm">
-              CSE student at University of Dhaka passionate about competitive
-              programming and software development. Building solutions that make
-              a difference.
+              CSE graduate from University of Dhaka, currently working as a
+              Software Engineer at Enosis Solutions BD. Passionate
+              about competitive programming and building impactful software.
             </p>
           </div>
 

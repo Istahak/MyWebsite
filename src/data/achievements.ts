@@ -136,4 +136,23 @@ export const achievements: Achievement[] = [
     featured: true,
     detailsFile: "cuet-iupc-2025.ts",
   },
+  {
+    id: "buet-cse-fest-iupc-2026",
+    title: "Inter University Programming Contest at BUET CSE Fest 2026",
+    date: "2026-04-05",
+    teamName: "DU_Odyssey",
+    rank: 9,
+    problemsSolved: 8,
+    category: "Programming Contest",
+    organizer: "BUET CSE Fest 2026",
+    location: "BUET, Dhaka",
+    description:
+      "Proud to share that Team DU_Odyssey secured 9th place at the Inter University Programming Contest at BUET CSE Fest 2026! We solved 8 problems in a very competitive field and stayed focused throughout the contest. This one was especially challenging because it came right after our thesis defense, but the experience taught us a lot about resilience, time management, and trusting our team coordination under pressure. Grateful for the journey, the learning, and my amazing teammates.",
+    image: "/image/achievements/buet-iupc-2026.jpg",
+    officialLink:
+      "https://toph.co/c/inter-university-buet-cse-fest-2026/standings",
+    tags: ["IUPC", "BUET", "CSE Fest", "Top 10", "Team DU_Odyssey"],
+    featured: true,
+    detailsFile: "buet-cse-fest-iupc-2026.ts",
+  },
 ];

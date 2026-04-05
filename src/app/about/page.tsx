@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About - Istahak Islam",
   description:
-    "Learn more about Istahak Islam's background, education, and journey in Computer Science and competitive programming at University of Dhaka.",
+    "Learn more about Istahak Islam's background, completed CSE education, software engineering role at Enosis Solutions BD, and competitive programming journey.",
 };
 
 export default function AboutPage() {
@@ -16,8 +16,8 @@ export default function AboutPage() {
             About Me
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Computer Science & Engineering Student at University of Dhaka |
-            Competitive Programmer | Software Engineer | ML Engineer
+            Software Engineer at Enosis Solutions BD |
+            Competitive Programmer | CSE Graduate, University of Dhaka
           </p>
         </div>
 
@@ -28,11 +28,11 @@ export default function AboutPage() {
               My Journey
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              I'm Istahak Islam, currently in my final year studying Computer
-              Science and Engineering at the University of Dhaka, one of the
-              most prestigious institutions in Bangladesh. My academic journey
-              has been filled with challenges, learning experiences, and a
-              growing passion for technology and problem-solving.
+              I'm Istahak Islam, a Computer Science and Engineering graduate
+              from the University of Dhaka, one of the most prestigious
+              institutions in Bangladesh. I am currently working as a Software
+              Engineer at Enosis Solutions BD, where I am working with modern
+              web and backend technologies in a professional environment.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
               What started as curiosity about how computers work has evolved
@@ -42,6 +42,41 @@ export default function AboutPage() {
               participating in programming contests, and building meaningful
               projects.
             </p>
+          </div>
+
+          <div className="bg-indigo-50 dark:bg-gray-800 rounded-lg p-8 mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              Current Role
+            </h2>
+            <div className="border-l-4 border-indigo-500 pl-6">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Software Engineer
+              </h3>
+              <p className="text-indigo-600 dark:text-indigo-400 font-medium">
+                Enosis Solutions BD
+              </p>
+              <p className="text-gray-600 dark:text-gray-300">
+                March 2026 - Present • Hybrid
+              </p>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">
+                Working on modern software development fundamentals and
+                full-stack engineering practices.
+              </p>
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700 dark:text-gray-300">
+                <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
+                  HTML & CSS
+                </div>
+                <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
+                  JavaScript
+                </div>
+                <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
+                  C#
+                </div>
+                <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
+                  .NET Core MVC
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Education */}
@@ -58,7 +93,7 @@ export default function AboutPage() {
                   University of Dhaka
                 </p>
                 <p className="text-gray-600 dark:text-gray-300">
-                  2021 - 2025 (Expected)
+                  2021 - 2025
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mt-2">
                   CGPA: 3.80/4.00
@@ -120,6 +155,21 @@ export default function AboutPage() {
               Experience
             </h2>
             <div className="space-y-6">
+              <div className="border-l-4 border-teal-500 pl-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Software Engineer
+                </h3>
+                <p className="text-teal-600 dark:text-teal-400 font-medium">
+                  Enosis Solutions BD
+                </p>
+                <p className="text-gray-600 dark:text-gray-300">
+                  March 2026 - Present
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 mt-2">
+                  Working with HTML, CSS, JavaScript, C#, and .NET Core MVC in
+                  a hybrid setup.
+                </p>
+              </div>
               <div className="border-l-4 border-teal-500 pl-6">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                   Competitive Programming Mentor
@@ -299,8 +349,7 @@ export default function AboutPage() {
                     Status:{" "}
                   </span>
                   <span className="text-green-600 dark:text-green-400">
-                    Looking for ML Engineer or Software Engineering
-                    Opportunities
+                    Software Engineer at Enosis Solutions BD
                   </span>
                 </div>
                 <div>
