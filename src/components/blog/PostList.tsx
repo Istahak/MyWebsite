@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { tagSlug } from "@/lib/tags";
+import { Icon } from "@/components/ui/Icon";
+import { Backdrop, Chip, Tile } from "@/components/ui/Tile";
 
 export interface PostSummary {
   slug: string;
@@ -38,63 +40,70 @@ export function Posts({
     ? posts.filter((post) => post.tags.some((tag) => tagSlug(tag) === activeTag))
     : posts;
 
-  const chip = (active: boolean) =>
+  const pill = (active: boolean) =>
     `rounded-full px-3 py-1 text-sm transition-colors ${
       active
         ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
-        : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+        : "border border-gray-200 bg-white text-gray-600 hover:border-indigo-300 hover:text-indigo-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300 dark:hover:border-indigo-400/40 dark:hover:text-indigo-400"
     }`;
 
   return (
-    <>
-      <nav aria-label="Filter by tag" className="mb-12 flex flex-wrap gap-2">
-        <Link href="/blog" className={chip(!activeTag)}>
+    <div className="space-y-8">
+      <nav aria-label="Filter by tag" className="flex flex-wrap gap-2">
+        <Link href="/blog" className={pill(!activeTag)}>
           All
         </Link>
         {tags.map((tag) => (
           <Link
             key={tag}
             href={`/blog?tag=${tagSlug(tag)}`}
-            className={chip(tagSlug(tag) === activeTag)}
+            className={pill(tagSlug(tag) === activeTag)}
           >
             {tag}
           </Link>
         ))}
       </nav>
 
-      <ul className="divide-y divide-gray-200 dark:divide-gray-800">
-        {visible.map((post) => (
-          <li key={post.slug} className="py-8 first:pt-0">
-            <article>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                <time dateTime={post.date}>{formatDate(post.date)}</time>
-                <span aria-hidden> · </span>
-                <span>{post.readingMinutes} min read</span>
-              </div>
-              <h2 className="mt-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="hover:text-blue-600 dark:hover:text-blue-400"
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {visible.map((post, index) => {
+          const lead = index === 0;
+          return (
+            <li key={post.slug} className={lead ? "md:col-span-2" : ""}>
+              <Tile
+                href={`/blog/${post.slug}`}
+                tint={lead ? "sky" : "indigo"}
+                className="h-full"
+              >
+                {lead && <Backdrop pattern="dots" glow="bg-sky-400/20 dark:bg-sky-500/15" />}
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-gray-500 dark:text-gray-400">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Icon name="calendar" className="h-3.5 w-3.5" />
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Icon name="clock" className="h-3.5 w-3.5" />
+                    {post.readingMinutes} min read
+                  </span>
+                </div>
+                <h2
+                  className={`mt-3 font-semibold tracking-tight text-gray-900 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400 ${
+                    lead ? "text-2xl" : "text-xl"
+                  }`}
                 >
                   {post.title}
-                </Link>
-              </h2>
-              <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
-                {post.excerpt}
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs text-gray-500 dark:text-gray-400"
-                  >
-                    #{tagSlug(tag)}
-                  </span>
-                ))}
-              </div>
-            </article>
-          </li>
-        ))}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                  {post.excerpt}
+                </p>
+                <div className="mt-auto flex flex-wrap gap-2 pt-4">
+                  {post.tags.map((tag) => (
+                    <Chip key={tag}>#{tagSlug(tag)}</Chip>
+                  ))}
+                </div>
+              </Tile>
+            </li>
+          );
+        })}
       </ul>
 
       {visible.length === 0 && (
@@ -102,6 +111,6 @@ export function Posts({
           No posts with this tag yet.
         </p>
       )}
-    </>
+    </div>
   );
 }

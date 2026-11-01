@@ -6,6 +6,8 @@ import "remark-github-blockquote-alert/alert.css";
 import { getAllPosts, getPost, renderPost } from "@/lib/blog";
 import { tagSlug } from "@/lib/tags";
 import TableOfContents from "@/components/blog/TableOfContents";
+import { Icon } from "@/components/ui/Icon";
+import { Chip, PageShell, Tile, TileLabel } from "@/components/ui/Tile";
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -74,48 +76,52 @@ export default async function BlogPost({ params }: BlogPageProps) {
   const older = posts[index + 1];
 
   return (
-    <div className="bg-white dark:bg-gray-900">
-      <div className="mx-auto max-w-7xl px-4 py-10 font-sans sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12 lg:px-8">
+    <PageShell width="max-w-7xl">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12">
         <div className="mx-auto w-full max-w-[60rem]">
           <header className="mb-8">
             <Link
               href="/blog"
-              className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
             >
-              ← All posts
+              <Icon name="arrowLeft" className="h-4 w-4" />
+              All posts
             </Link>
 
-            <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-              <span>
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-gray-500 dark:text-gray-400">
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name="calendar" className="h-3.5 w-3.5" />
                 Last update: <time dateTime={post.date}>{formatDate(post.date)}</time>
               </span>
-              <span aria-hidden>·</span>
-              <span>{post.readingMinutes} min read</span>
-              <span className="rounded bg-gray-100 px-1.5 py-0.5 text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+              <span className="inline-flex items-center gap-1.5">
+                <Icon name="clock" className="h-3.5 w-3.5" />
+                {post.readingMinutes} min read
+              </span>
+              <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-gray-600 dark:bg-white/10 dark:text-gray-300">
                 {post.category}
               </span>
             </div>
 
-            <h1 className="mt-3 text-[2rem] leading-tight font-light text-gray-900 dark:text-white">
+            <h1 className="mt-3 text-3xl leading-tight font-semibold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
               {post.title}
             </h1>
 
-            <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-sm">
+            <div className="mt-4 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
                 <Link
                   key={tag}
                   href={`/blog?tag=${tagSlug(tag)}`}
-                  className="text-indigo-700 hover:underline dark:text-indigo-300"
+                  className="hover:opacity-80"
                 >
-                  #{tagSlug(tag)}
+                  <Chip>#{tagSlug(tag)}</Chip>
                 </Link>
               ))}
             </div>
           </header>
 
           {headings.length > 0 && (
-            <details className="mb-10 rounded-lg border border-gray-200 p-4 lg:hidden dark:border-gray-700">
-              <summary className="cursor-pointer text-sm font-semibold text-gray-900 dark:text-white">
+            <details className="mb-10 rounded-3xl border border-gray-200/80 bg-white p-5 lg:hidden dark:border-white/10 dark:bg-white/[0.03]">
+              <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.14em] text-gray-500 dark:text-gray-400">
                 Table of contents
               </summary>
               <div className="mt-4">
@@ -128,45 +134,45 @@ export default async function BlogPost({ params }: BlogPageProps) {
             {content}
           </article>
 
-          <nav className="mt-16 grid gap-4 border-t border-gray-200 pt-8 sm:grid-cols-2 dark:border-gray-700">
+          <nav className="mt-16 grid gap-4 sm:grid-cols-2">
             {older ? (
-              <Link
-                href={`/blog/${older.slug}`}
-                className="rounded-lg border border-gray-200 p-4 hover:border-blue-500 dark:border-gray-700 dark:hover:border-blue-400"
-              >
-                <span className="text-sm text-gray-500 dark:text-gray-400">← Older</span>
-                <span className="mt-1 block font-medium text-gray-900 dark:text-white">
+              <Tile href={`/blog/${older.slug}`}>
+                <span className="font-mono text-xs uppercase tracking-[0.14em] text-gray-500 dark:text-gray-400">
+                  ← Older
+                </span>
+                <span className="mt-2 block font-semibold tracking-tight text-gray-900 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
                   {older.title}
                 </span>
-              </Link>
+              </Tile>
             ) : (
               <span />
             )}
             {newer && (
-              <Link
-                href={`/blog/${newer.slug}`}
-                className="rounded-lg border border-gray-200 p-4 text-right hover:border-blue-500 dark:border-gray-700 dark:hover:border-blue-400"
-              >
-                <span className="text-sm text-gray-500 dark:text-gray-400">Newer →</span>
-                <span className="mt-1 block font-medium text-gray-900 dark:text-white">
+              <Tile href={`/blog/${newer.slug}`} className="text-right">
+                <span className="font-mono text-xs uppercase tracking-[0.14em] text-gray-500 dark:text-gray-400">
+                  Newer →
+                </span>
+                <span className="mt-2 block font-semibold tracking-tight text-gray-900 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
                   {newer.title}
                 </span>
-              </Link>
+              </Tile>
             )}
           </nav>
         </div>
 
         {headings.length > 0 && (
           <aside className="hidden lg:block">
-            <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
-              <p className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                Table of contents
-              </p>
-              <TableOfContents headings={headings} />
+            <div className="sticky top-24">
+              <Tile className="max-h-[calc(100vh-8rem)] overflow-y-auto p-5">
+                <TileLabel icon="book">Table of contents</TileLabel>
+                <div className="mt-4">
+                  <TableOfContents headings={headings} />
+                </div>
+              </Tile>
             </div>
           </aside>
         )}
       </div>
-    </div>
+    </PageShell>
   );
 }

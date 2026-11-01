@@ -7,23 +7,9 @@ export interface ProjectDetail {
 export const seedhopeDetails: ProjectDetail = {
   slug: 'seedhope',
   title: 'SeedHope - Crowdfunding & Fundraising Platform',
-  content: `# SeedHope - Crowdfunding & Fundraising Platform
+  content: `A full-stack mobile and web application for creating, managing, and contributing to fundraising campaigns. Built with Spring Boot backend and React Native frontend, this platform enables users to raise funds for various causes including medical, education, disaster relief, and community projects.
 
-A full-stack mobile and web application for creating, managing, and contributing to fundraising campaigns. Built with Spring Boot backend and React Native frontend, this platform enables users to raise funds for various causes including medical, education, disaster relief, and community projects.
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Technology Stack](#technology-stack)
-- [Architecture & Design Patterns](#architecture--design-patterns)
-- [Project Structure](#project-structure)
-- [Features Breakdown](#features-breakdown)
-- [API Endpoints](#api-endpoints)
-- [Setup & Installation](#setup--installation)
-- [Screenshots](#screenshots)
-
-## 🎯 Overview
+## Overview
 
 SeedHope is a comprehensive crowdfunding platform designed to connect people who need financial support with those willing to help. The application provides a secure, user-friendly interface for creating fundraising campaigns, making donations, and tracking progress toward funding goals.
 
@@ -37,7 +23,7 @@ SeedHope is a comprehensive crowdfunding platform designed to connect people who
 - Comment system with nested replies
 - File upload capabilities
 
-## ✨ Key Features
+## Key Features
 
 ### 1. **User Management**
 
@@ -136,7 +122,7 @@ SeedHope is a comprehensive crowdfunding platform designed to connect people who
 - Monitor all campaigns
 - User management
 
-## 🛠 Technology Stack
+## Technology Stack
 
 ### Backend
 
@@ -186,7 +172,7 @@ SeedHope is a comprehensive crowdfunding platform designed to connect people who
 - **Payments:** Payment transaction records
 - **Payment Status:** Transaction status tracking
 
-## 🏗 Architecture & Design Patterns
+## Architecture & Design Patterns
 
 ### Design Patterns Implemented
 
@@ -240,7 +226,7 @@ SeedHope is a comprehensive crowdfunding platform designed to connect people who
 └─────────────────────────────────────────┘
 \`\`\`
 
-## 📁 Project Structure
+## Project Structure
 
 \`\`\`
 SeedHope/
@@ -297,7 +283,7 @@ SeedHope/
     └── package.json                    # Dependencies
 \`\`\`
 
-## 🎨 Features Breakdown
+## Features Breakdown
 
 ### Authentication Flow
 
@@ -357,7 +343,7 @@ Campaign Comments
     └── Nested replies supported
 \`\`\`
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Authentication
 
@@ -420,7 +406,7 @@ Campaign Comments
 - \`POST /uploads/user\` - Upload user photo
 - \`POST /uploads/document\` - Upload document
 
-## 🚀 Setup & Installation
+## Setup & Installation
 
 ### Prerequisites
 
@@ -478,11 +464,11 @@ npm run android
 npm run ios
 \`\`\`
 
-## 📸 Screenshots
+## Screenshots
 
 _(Add your application screenshots here)_
 
-## 🔒 Security Features
+## Security Features
 
 - JWT token authentication with expiration
 - BCrypt password hashing (strength 12)
@@ -494,7 +480,7 @@ _(Add your application screenshots here)_
 - SQL injection prevention (JPA)
 - XSS protection
 
-## 🎯 Use Cases
+## Use Cases
 
 1. **Medical Fundraising:** Raise funds for medical treatments and emergencies
 2. **Education:** Collect donations for educational expenses
@@ -505,7 +491,7 @@ _(Add your application screenshots here)_
 7. **Sports Events:** Fundraise for sports teams and events
 8. **Family Support:** Help families in financial distress
 
-## 📊 Key Metrics Tracked
+## Key Metrics Tracked
 
 - Total donations received
 - Number of campaigns created
@@ -516,7 +502,7 @@ _(Add your application screenshots here)_
 - Trending campaigns
 - Category-wise analytics
 
-## 🧪 Testing
+## Testing
 
 The project includes:
 
@@ -524,19 +510,19 @@ The project includes:
 - Integration tests for APIs
 - Frontend component testing (Jest)
 
-## 🤝 Contributing
+## Contributing
 
 This is a personal portfolio project built for demonstration purposes.
 
-## 📝 License
+## License
 
 This project is part of a personal portfolio and was built for educational purposes.
 
-## 👨‍💻 Developer
+## Developer
 
 Built by **HP** as a Software Development Project
 
-## 📞 Interview Talking Points
+## Interview Talking Points
 
 When discussing this project in interviews, highlight:
 
@@ -551,7 +537,7 @@ When discussing this project in interviews, highlight:
 9. **File Handling:** Secure file upload and storage
 10. **Real-world Application:** Solves actual social problems
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - Push notifications for campaign updates
 - Real-time chat support

@@ -7,33 +7,7 @@ export interface ProjectDetail {
 export const kodeshellDetails: ProjectDetail = {
   slug: 'kodeshell',
   title: 'KodeShell - Competitive Programming Companion',
-  content: `# KodeShell 🚀
-
-<div align="center">
-  <h3>Your All-in-One Competitive Programming Companion</h3>
-  <p>A comprehensive Android mobile application that unifies contest management, progress tracking, and community engagement across multiple competitive programming platforms.</p>
-</div>
-
----
-
-## 📖 Table of Contents
-
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Platform Integrations](#-platform-integrations)
-- [Technical Architecture](#-technical-architecture)
-- [Features Breakdown](#-features-breakdown)
-- [Technologies Used](#-technologies-used)
-- [Installation](#-installation)
-- [Project Structure](#-project-structure)
-- [Screenshots](#-screenshots)
-- [Future Enhancements](#-future-enhancements)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
-## 🎯 Overview
+  content: `## Overview
 
 **KodeShell** is an Android mobile application originally developed for the CSE-2216 Application Development Lab. It addresses a common pain point for competitive programmers: the need to navigate multiple websites to track contests, submissions, and connect with the community.
 
@@ -49,23 +23,23 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🏆 Contest Management
+### Contest Management
 - **Unified Contest Calendar**: View upcoming contests from Codeforces, LeetCode, and AtCoder in a single feed
 - **Smart Reminders**: Set custom alarms for contests you want to participate in
 - **Instant Notifications**: Get notified before contests begin
 - **Contest Details**: Direct access to contest links, duration, and timing information
 - **Contest Insider**: Detailed view of each contest with registration links
 
-### 👤 Multi-Platform Profile Integration
+### Multi-Platform Profile Integration
 - **Codeforces Integration**: View user info, rating, rank, and last 10 submissions
 - **LeetCode Integration**: Display solve statistics, contest rankings, and problem-solving history
 - **AtCoder Integration**: Track contest participation and performance metrics
 - **Unified Profile View**: See all your competitive programming stats in one place with tabbed interface
 - **Profile Linking**: Connect your handles from all three platforms
 
-### 📱 Social & Community Features
+### Social & Community Features
 - **News Feed**: Community-driven content with post creation and sharing
 - **Real-time Messaging**: One-on-one chat with other programmers to discuss problems
 - **Comment System**: Engage in discussions on posts with threaded comments
@@ -74,7 +48,7 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 - **Stalk Feature**: View other users' complete profiles and submission history across all platforms
 - **User Directory**: Browse all registered users on KodeShell
 
-### 🔐 Authentication & User Management
+### Authentication & User Management
 - **Email/Password Authentication**: Traditional signup and login
 - **Google OAuth**: Quick sign-in with Google account
 - **Two-Step Registration**: Comprehensive profile setup (personal info + platform handles)
@@ -83,13 +57,13 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 - **Profile Customization**: Choose from 12 different avatar options
 - **Edit Profile**: Update personal information, status message, and linked platform handles
 
-### 🔔 Notification System
+### Notification System
 - **Contest Reminders**: Custom alarm system using Android AlarmManager
 - **Exact Timing**: Schedule notifications with precise timing before contests
 - **Wake Lock**: Ensures notifications work even when device is asleep
 - **Push Notifications**: Real-time updates for messages and community activities
 
-### 📊 Submission Tracking
+### Submission Tracking
 - **Recent Submissions**: View your last 10 Codeforces submissions with verdict and problem details
 - **Submission History**: Track problem-solving progress across platforms
 - **Detailed View**: See submission time, language, verdict, and problem information
@@ -97,7 +71,7 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 
 ---
 
-## 🌐 Platform Integrations
+## Platform Integrations
 
 ### Codeforces API
 - **Implementation**: \`CodeforcesAPIHelper.java\`
@@ -128,7 +102,7 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 
 ---
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 ### Architecture Pattern
 - **MVC (Model-View-Controller)**: Traditional Android architecture
@@ -160,7 +134,7 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 
 ---
 
-## 📦 Features Breakdown
+## Features Breakdown
 
 ### 1. Authentication Flow
 **Activities**: \`LoginActivity\`, \`SignupActivity1\`, \`SignupActivity2\`, \`OtpActivity\`, \`ForgotPasswordActivity\`, \`ResetPasswordActivity\`
@@ -292,7 +266,7 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 ### Android SDK & Core
 - **Minimum SDK**: Android 7.0 (API 24)
@@ -339,7 +313,7 @@ KodeShell provides a **unified dashboard** that aggregates all this information 
 
 ---
 
-## 📥 Installation
+## Installation
 
 ### Prerequisites
 - Android Studio Arctic Fox or later
@@ -415,7 +389,7 @@ For full functionality, the app uses public APIs that don't require keys:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 \`\`\`
 KodeShell/
@@ -508,7 +482,7 @@ KodeShell/
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 > **Note**: Add screenshots of your app here to showcase the UI/UX
 
@@ -526,7 +500,7 @@ Recommended screenshots to add:
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 ### Potential Features
 - [ ] **Dark Mode**: Theme switching for better UX
@@ -559,7 +533,7 @@ Recommended screenshots to add:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -577,13 +551,13 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📄 License
+## License
 
 This project was developed as part of academic coursework for CSE-2216 Application Development Lab.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Mahmudul Yeamin**
 
@@ -592,7 +566,7 @@ This project was developed as part of academic coursework for CSE-2216 Applicati
 
 ---
 
-## 📞 Contact & Support
+## Contact & Support
 
 For questions, suggestions, or issues:
 - Open an issue on GitHub
@@ -600,7 +574,7 @@ For questions, suggestions, or issues:
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Course**: CSE-2216 Application Development Lab
 - **APIs Used**: 
@@ -611,7 +585,7 @@ For questions, suggestions, or issues:
 
 ---
 
-## 📊 Project Statistics
+## Project Statistics
 
 - **Activities**: 9
 - **Fragments**: 16
