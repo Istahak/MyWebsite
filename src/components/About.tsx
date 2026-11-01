@@ -83,7 +83,21 @@ const About = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  Working with HTML, CSS, JavaScript, C#, and .NET Core MVC
+                  Building with C#, ASP.NET Core, Web Forms, and SQL Server
+                </li>
+                <li className="flex items-center">
+                  <svg
+                    className="w-5 h-5 text-green-500 mr-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Researching spatial-temporal Granger causality at the University of Dhaka
                 </li>
                 <li className="flex items-center">
                   <svg
@@ -151,7 +165,7 @@ const About = () => {
                   <span className="font-medium">Work Model:</span> Hybrid
                 </p>
                 <p className="text-gray-700 dark:text-gray-300">
-                  <span className="font-medium">Working With:</span> HTML, CSS, JavaScript, C#, .NET Core MVC
+                  <span className="font-medium">Working With:</span> C#, ASP.NET Core, Web Forms, AngularJS, SQL Server
                 </p>
               </div>
             </div>
@@ -170,10 +184,10 @@ const About = () => {
                     University of Dhaka
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    2021 - 2025
+                    Completed February 2026
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Current CGPA: 3.80/4.00
+                    CGPA: 3.80/4.00
                   </p>
                 </div>
               </div>
@@ -207,7 +221,7 @@ const About = () => {
               </h4>
               <div className="space-y-3">
                 <a
-                  href="https://codeforces.com/profile/_0Istahak"
+                  href="https://codeforces.com/profile/Istahak16"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex justify-between items-center p-2 rounded-lg hover:bg-white dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer group"
@@ -216,7 +230,7 @@ const About = () => {
                     Codeforces
                   </span>
                   <span className="text-blue-600 dark:text-blue-400 font-medium">
-                    Expert • (Max Rating 1764)
+                    Candidate Master • (Max Rating 1938)
                   </span>
                 </a>
                 <a

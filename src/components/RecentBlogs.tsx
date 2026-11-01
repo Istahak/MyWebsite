@@ -1,11 +1,8 @@
 import Link from "next/link";
-import { blogPosts } from "@/data/blog";
+import { getAllPosts } from "@/lib/blog";
 
 const RecentBlogs = () => {
-  // Get the 3 most recent featured blog posts
-  const recentPosts = blogPosts
-    .filter((post) => post.featured && post.published)
-    .slice(0, 3);
+  const recentPosts = getAllPosts().slice(0, 3);
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -35,7 +32,7 @@ const RecentBlogs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {recentPosts.map((post) => (
             <article
-              key={post.id}
+              key={post.slug}
               className="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
             >
               {/* Blog Header */}
@@ -62,7 +59,7 @@ const RecentBlogs = () => {
                 {/* Meta Information */}
                 <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-3">
                   <span>{formatDate(post.date)}</span>
-                  <span>{post.readTime}</span>
+                  <span>{post.readingMinutes} min read</span>
                 </div>
 
                 {/* Title */}

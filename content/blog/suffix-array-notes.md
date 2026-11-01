@@ -1,24 +1,21 @@
-export interface BlogDetail {
-  slug: string;
-  title: string;
-  content: string;
-}
-
-export const suffixArrayDetails: BlogDetail = {
-  slug: 'suffix-array-notes',
-  title: 'Suffix Array (SA) — Contest Black-Box Notes',
-  content: `# Suffix Array (SA) — Contest Black-Box Notes (C++)
-
+---
+title: "Suffix Array (SA) — Contest Black-Box Notes"
+excerpt: "Complete black-box guide to Suffix Arrays for competitive programming. Includes implementation, LCP array, pattern matching, distinct substrings, and common contest applications with ready-to-use code templates."
+date: "2026-01-20"
+category: "Tutorial"
+tags: ["Suffix Array","String Algorithms","Data Structures","Advanced","CP"]
+published: true
+---
 ## What it is
-For a string \`s\` of length \`n\`, the **suffix array** \`sa\` is a permutation of \`0..n-1\` such that:
+For a string `s` of length `n`, the **suffix array** `sa` is a permutation of `0..n-1` such that:
 
-- \`s.substr(sa[0]) < s.substr(sa[1]) < ... < s.substr(sa[n-1])\` (lexicographic order)
+- `s.substr(sa[0]) < s.substr(sa[1]) < ... < s.substr(sa[n-1])` (lexicographic order)
 
 So:
-- \`sa[i]\` = starting index of the **i-th** smallest suffix
-- \`pos[i]\` (inverse SA) = rank of suffix starting at \`i\`
+- `sa[i]` = starting index of the **i-th** smallest suffix
+- `pos[i]` (inverse SA) = rank of suffix starting at `i`
 
-Example: \`s = "banana"\`
+Example: `s = "banana"`
 
 Suffixes:
 - 0: banana
@@ -36,7 +33,7 @@ Sorted suffixes:
 - 4: na
 - 2: nana
 
-\`sa = [5, 3, 1, 0, 4, 2]\`
+`sa = [5, 3, 1, 0, 4, 2]`
 
 ---
 
@@ -44,22 +41,22 @@ Sorted suffixes:
 Copy this struct and use the functions listed in the table below.
 
 ### Core guarantees (what returns what)
-- \`SuffixArray sa(s)\` builds \`sa.sa\` and \`sa.pos\`
-- \`sa.build_lcp()\` builds \`sa.lcp\` where \`lcp[i] = LCP(sa[i], sa[i-1])\` (and \`lcp[0]=0\`)
-- \`sa.find_range(p)\` returns \`[L, R)\` interval in suffix array where suffixes start with pattern \`p\`
-- \`sa.count(p)\` returns number of occurrences of \`p\` in \`s\`
-- \`sa.contains(p)\` returns true/false
+- `SuffixArray sa(s)` builds `sa.sa` and `sa.pos`
+- `sa.build_lcp()` builds `sa.lcp` where `lcp[i] = LCP(sa[i], sa[i-1])` (and `lcp[0]=0`)
+- `sa.find_range(p)` returns `[L, R)` interval in suffix array where suffixes start with pattern `p`
+- `sa.count(p)` returns number of occurrences of `p` in `s`
+- `sa.contains(p)` returns true/false
 
 Then optional power tools:
-- \`sa.lcp_suffix(i, j)\` returns LCP length of suffixes starting at \`i\` and \`j\` (needs \`build_lcp()\` + RMQ)
-- \`sa.compare_substrings(l1, r1, l2, r2)\` lexicographically compares two substrings in ~O(1)
+- `sa.lcp_suffix(i, j)` returns LCP length of suffixes starting at `i` and `j` (needs `build_lcp()` + RMQ)
+- `sa.compare_substrings(l1, r1, l2, r2)` lexicographically compares two substrings in ~O(1)
 
 ---
 
 ## Implementation (SA + LCP + RMQ)
 This is the standard doubling algorithm: **O(n log² n)** for SA build, **O(n)** for LCP.
 
-\`\`\`cpp
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -229,16 +226,16 @@ struct SuffixArray {
         return (c1 < c2) ? -1 : 1;
     }
 };
-\`\`\`
+```
 
 ---
 
 ## Applications (with common contest examples)
 
 ### 1) Count pattern occurrences (multi-query)
-Use SA interval \`[L,R)\`.
+Use SA interval `[L,R)`.
 
-\`\`\`cpp
+```cpp
 SuffixArray sa(s);
 
 int q; cin >> q;
@@ -246,16 +243,16 @@ while (q--) {
     string p; cin >> p;
     cout << sa.count(p) << "\n";
 }
-\`\`\`
+```
 
 What you rely on:
-- \`sa.count(p)\` returns number of occurrences of \`p\` in \`s\`
+- `sa.count(p)` returns number of occurrences of `p` in `s`
 
 ---
 
 ### 2) Get all occurrence positions (or any one)
 
-\`\`\`cpp
+```cpp
 SuffixArray sa(s);
 
 string p = "ana";
@@ -274,18 +271,18 @@ if (L == R) {
     for (int x : all) cout << x << " ";
     cout << "\n";
 }
-\`\`\`
+```
 
 What returns what:
-- \`find_range(p)\` returns SA-interval of matches
-- \`sa.sa[L..R-1]\` are the starting indices of matching suffixes (hence pattern occurrences)
+- `find_range(p)` returns SA-interval of matches
+- `sa.sa[L..R-1]` are the starting indices of matching suffixes (hence pattern occurrences)
 
 ---
 
 ### 3) Longest repeating substring (appears at least twice)
 Fact: maximum value in LCP array is the answer length.
 
-\`\`\`cpp
+```cpp
 SuffixArray sa(s);
 sa.build_lcp();
 
@@ -300,10 +297,10 @@ for (int i = 1; i < sa.n; i++) {
 
 cout << bestLen << "\n";
 if (bestLen > 0) cout << s.substr(bestAt, bestLen) << "\n";
-\`\`\`
+```
 
 What returns what:
-- \`sa.lcp[i]\` = LCP length of suffix \`sa.sa[i]\` with previous suffix \`sa.sa[i-1]\`
+- `sa.lcp[i]` = LCP length of suffix `sa.sa[i]` with previous suffix `sa.sa[i-1]`
 
 ---
 
@@ -313,7 +310,7 @@ Formula:
 - duplicates counted by LCP sum
 - distinct (non-empty) = total − sum(lcp)
 
-\`\`\`cpp
+```cpp
 SuffixArray sa(s);
 sa.build_lcp();
 
@@ -324,15 +321,15 @@ for (int i = 1; i < sa.n; i++) dup += sa.lcp[i];
 
 long long distinctNonEmpty = total - dup;
 cout << distinctNonEmpty << "\n";
-\`\`\`
+```
 
 ---
 
 ### 5) Longest common substring of two strings
-Concatenate: \`t = a + sep + b\` where \`sep\` is a character not in either string.
+Concatenate: `t = a + sep + b` where `sep` is a character not in either string.
 Then max LCP among adjacent suffixes coming from different halves.
 
-\`\`\`cpp
+```cpp
 string a, b;
 cin >> a >> b;
 
@@ -363,14 +360,14 @@ for (int i = 1; i < sa.n; i++) {
 
 cout << bestLen << "\n";
 if (bestLen > 0) cout << t.substr(bestAt, bestLen) << "\n";
-\`\`\`
+```
 
 ---
 
 ### 6) Minimum rotation (circular string)
-Smallest rotation of \`s\` can be found by building SA on \`s+s\` and taking the first suffix that starts in \`[0,n)\`.
+Smallest rotation of `s` can be found by building SA on `s+s` and taking the first suffix that starts in `[0,n)`.
 
-\`\`\`cpp
+```cpp
 string s; cin >> s;
 int n = (int)s.size();
 string t = s + s;
@@ -384,7 +381,7 @@ for (int idx : sa.sa) {
 
 string rot = t.substr(start, n);
 cout << rot << "\n";
-\`\`\`
+```
 
 ---
 
@@ -396,7 +393,7 @@ This is useful in problems like:
 - “pick smallest substring among candidates”,
 - “compare two substrings many times”.
 
-\`\`\`cpp
+```cpp
 SuffixArray sa(s);
 sa.build_lcp();
 
@@ -407,10 +404,10 @@ int l2=4, r2=5; // "na"
 int cmp = sa.compare_substrings(l1, r1, l2, r2);
 // cmp = -1 => first smaller, 0 => equal, +1 => first bigger
 cout << cmp << "\n";
-\`\`\`
+```
 
 Main point:
-- \`compare_substrings\` uses \`lcp_suffix\` + first mismatch character.
+- `compare_substrings` uses `lcp_suffix` + first mismatch character.
 
 ---
 
@@ -419,26 +416,28 @@ Often needed for:
 - “how long do two parts match?”,
 - “longest common prefix of substrings starting at i and j”.
 
-\`\`\`cpp
+```cpp
 SuffixArray sa(s);
 sa.build_lcp();
 
 int i = 1, j = 3; // suffixes "anana" and "ana"
 cout << sa.lcp_suffix(i, j) << "\n"; // 3
-\`\`\`
+```
 
 ---
 
 ### 9) Longest substring that appears at least K times
 Key fact:
-- Among any \`K\` consecutive suffixes in SA, the common prefix of all \`K\` suffixes has length = min LCP in that window.
+- Among any `K` consecutive suffixes in SA, the common prefix of all `K` suffixes has length = min LCP in that window.
 
 So answer is:
-$$\max_i \min(lcp[i+1..i+K-1])$$
+$$
+\max_i \min(lcp[i+1..i+K-1])
+$$
 
-Compute sliding window minimum of \`lcp\` in **O(n)**.
+Compute sliding window minimum of `lcp` in **O(n)**.
 
-\`\`\`cpp
+```cpp
 int longest_repeated_at_least_k(const SuffixArray& sa, int K) {
     int n = sa.n;
     if (K <= 1) return n;
@@ -472,51 +471,51 @@ int longest_repeated_at_least_k(const SuffixArray& sa, int K) {
 SuffixArray sa(s);
 sa.build_lcp();
 cout << longest_repeated_at_least_k(sa, 3) << "\n";
-\`\`\`
+```
 
 ---
 
 ## Quick checklist (contest workflow)
 
 1) Build SA:
-\`\`\`cpp
+```cpp
 SuffixArray sa(s);
-\`\`\`
+```
 
 2) If you only do pattern queries: you are done.
-- use \`sa.find_range(p)\`, \`sa.count(p)\`, \`sa.contains(p)\`
+- use `sa.find_range(p)`, `sa.count(p)`, `sa.contains(p)`
 
 3) If you need LCP-based stuff: build LCP once.
-\`\`\`cpp
+```cpp
 sa.build_lcp();
-\`\`\`
+```
 
 4) Now you can also use:
-- \`sa.lcp_suffix(i, j)\`
-- \`sa.compare_substrings(l1,r1,l2,r2)\`
+- `sa.lcp_suffix(i, j)`
+- `sa.compare_substrings(l1,r1,l2,r2)`
 - distinct substrings / longest repeats / repeats >= K
 
 ---
 
 ## Complexity (rule of thumb)
 
-If you want, I can also add an \`O(n log n)\` SA build (radix sort) version, but the above is usually fast enough for \`n <= 2e5\`–\`5e5\`.
+If you want, I can also add an `O(n log n)` SA build (radix sort) version, but the above is usually fast enough for `n <= 2e5`–`5e5`.
 
 ---
 
 ## Extra examples (more contest patterns)
 
-### 10) Lexicographically smallest substring of fixed length \`L\`
+### 10) Lexicographically smallest substring of fixed length `L`
 
-**Problem:** Among all substrings of \`s\` with length \`L\`, find the lexicographically smallest one.
+**Problem:** Among all substrings of `s` with length `L`, find the lexicographically smallest one.
 
-**Key idea:** Any substring of length \`L\` is the prefix of length \`L\` of some suffix \`s[i..]\`. The smallest such substring comes from the smallest suffix that has at least \`L\` characters remaining.
+**Key idea:** Any substring of length `L` is the prefix of length `L` of some suffix `s[i..]`. The smallest such substring comes from the smallest suffix that has at least `L` characters remaining.
 
 **What to call / what you get:**
-- Call \`min_substring_len_L(sa, L)\`
-- Returns \`{startIndex, substring}\`
+- Call `min_substring_len_L(sa, L)`
+- Returns `{startIndex, substring}`
 
-\`\`\`cpp
+```cpp
 pair<int,string> min_substring_len_L(const string& s, const SuffixArray& sa, int L) {
     int n = sa.n;
     for (int idx : sa.sa) {
@@ -531,27 +530,29 @@ pair<int,string> min_substring_len_L(const string& s, const SuffixArray& sa, int
 SuffixArray sa(s);
 auto [i, sub] = min_substring_len_L(s, sa, 3);
 cout << i << " " << sub << "\n";
-\`\`\`
+```
 
 ---
 
 ### 11) K-th lexicographically smallest **distinct** substring
 
-**Problem:** Find the \`k\`-th smallest distinct substring (1-indexed).
+**Problem:** Find the `k`-th smallest distinct substring (1-indexed).
 
 **Key idea:**
 - All substrings are prefixes of suffixes.
-- From suffix at \`sa[i]\`, you can form \`n-sa[i]\` prefixes.
-- But \`lcp[i]\` of them are duplicates already seen due to previous suffix in SA.
+- From suffix at `sa[i]`, you can form `n-sa[i]` prefixes.
+- But `lcp[i]` of them are duplicates already seen due to previous suffix in SA.
 
-So new distinct substrings contributed by suffix \`sa[i]\` are:
-$$ (n - sa[i]) - lcp[i] $$
+So new distinct substrings contributed by suffix `sa[i]` are:
+$$
+(n - sa[i]) - lcp[i]
+$$
 
 **What to call / what you get:**
-- Call \`kth_distinct_substring(sa, k)\`
-- Returns the substring (or empty string if \`k\` too large)
+- Call `kth_distinct_substring(sa, k)`
+- Returns the substring (or empty string if `k` too large)
 
-\`\`\`cpp
+```cpp
 string kth_distinct_substring(const SuffixArray& sa, long long k) {
     // requires sa.build_lcp() already called
     int n = sa.n;
@@ -573,96 +574,100 @@ string kth_distinct_substring(const SuffixArray& sa, long long k) {
 SuffixArray sa(s);
 sa.build_lcp();
 cout << kth_distinct_substring(sa, 5) << "\n";
-\`\`\`
+```
 
 ---
 
 ### 12) K-th lexicographically smallest substring (**with duplicates**) via suffix-tree-from-SA
 
-This is the typical “Substring Order II” style problem: count **all** substrings (not just distinct), sort them lexicographically (with multiplicity), and output the \`k\`-th.
+This is the typical “Substring Order II” style problem: count **all** substrings (not just distinct), sort them lexicographically (with multiplicity), and output the `k`-th.
 
 Why suffix array alone isn’t enough:
 - If you list “all prefixes of suffixes in SA order”, you get duplicates scattered across many suffixes.
 - You need a structure that groups equal prefixes and tracks **how many times** each prefix occurs.
 
 The clean way with suffix arrays is:
-1) Build \`sa\` and \`lcp\`.
-2) Build the **suffix tree** (compressed suffix trie) from \`sa + lcp\`.
+1) Build `sa` and `lcp`.
+2) Build the **suffix tree** (compressed suffix trie) from `sa + lcp`.
 3) Store, for every node, how many suffixes (leaves) are under it → that equals the **occurrence count** of every substring on the path.
-4) Walk the tree in lexicographic order and “consume” \`k\` using multiplicities.
+4) Walk the tree in lexicographic order and “consume” `k` using multiplicities.
 
 #### Building a suffix tree from SA + LCP (stack method)
 
 Each node represents a prefix of some suffixes.
-- \`depth(v)\` = length of the string from root to node \`v\`.
-- Each edge stores a label as an interval \`[l..r]\` into the original string \`s\`.
+- `depth(v)` = length of the string from root to node `v`.
+- Each edge stores a label as an interval `[l..r]` into the original string `s`.
 
 Algorithm sketch (classic):
-- Maintain a stack of nodes with strictly increasing \`depth\`.
+- Maintain a stack of nodes with strictly increasing `depth`.
 - Process suffixes in SA order.
-- Let \`curLcp = lcp[i]\` (with \`lcp[0]=0\`).
-    - Pop while \`depth(stack.top) > curLcp\`.
-    - If \`depth(stack.top) < curLcp\`, you must **split** the edge to create an internal node of depth \`curLcp\`.
-    - Create a new leaf for suffix \`sa[i]\` and attach it under the current top; the new leaf edge starts at \`sa[i] + depth(parent)\`.
+- Let `curLcp = lcp[i]` (with `lcp[0]=0`).
+    - Pop while `depth(stack.top) > curLcp`.
+    - If `depth(stack.top) < curLcp`, you must **split** the edge to create an internal node of depth `curLcp`.
+    - Create a new leaf for suffix `sa[i]` and attach it under the current top; the new leaf edge starts at `sa[i] + depth(parent)`.
 
 This builds the same tree a suffix-tree algorithm would build, but using SA+LCP.
 
 #### Counting substrings with multiplicity in the tree
 
-Define for each node \`v\`:
-- \`occ[v]\` = number of leaves in the subtree of \`v\` (how many suffixes share the prefix).
-- \`sub[v]\` = total number of substrings (with multiplicity) contributed by edges in the subtree of \`v\`.
+Define for each node `v`:
+- `occ[v]` = number of leaves in the subtree of `v` (how many suffixes share the prefix).
+- `sub[v]` = total number of substrings (with multiplicity) contributed by edges in the subtree of `v`.
 
-For an edge \`u -> v\` with label length \`len\`:
-- Along this edge there are \`len\` different “stop points” (prefixes of the edge label).
-- Each of those prefixes occurs \`occ[v]\` times in the original string.
+For an edge `u -> v` with label length `len`:
+- Along this edge there are `len` different “stop points” (prefixes of the edge label).
+- Each of those prefixes occurs `occ[v]` times in the original string.
 
 So that edge contributes:
-$$ occ[v] \cdot len $$
+$$
+occ[v] \cdot len
+$$
 
 And including deeper edges:
-$$ total(u\to v) = occ[v] \cdot len + sub[v] $$
+$$
+total(u\to v) = occ[v] \cdot len + sub[v]
+$$
 
-You can compute \`occ[]\` and \`sub[]\` with one postorder DFS.
+You can compute `occ[]` and `sub[]` with one postorder DFS.
 
 #### Selecting the k-th substring (1-indexed)
 
 If children edges of each node are processed in increasing order of their first character, then the traversal matches lexicographic order.
 
-At node \`u\`, for each outgoing edge \`e=(u\to v)\` in sorted order:
-- \`pref = occ[v] * len(e)\` are the substrings that end **on this edge**
-- \`tot  = pref + sub[v]\` are all substrings in this edge’s subtree
+At node `u`, for each outgoing edge `e=(u\to v)` in sorted order:
+- `pref = occ[v] * len(e)` are the substrings that end **on this edge**
+- `tot  = pref + sub[v]` are all substrings in this edge’s subtree
 
 Selection logic:
-- If \`k > tot\`, then \`k -= tot\` and try the next edge.
-- Else if \`k <= pref\`, the answer ends on this edge:
-    - Let $t = \lceil k / occ[v] \rceil$ (1..len), then take the first \`t\` characters of the edge label.
-- Else (\`k > pref\`):
-    - \`k -= pref\`, append the whole edge label, and descend into \`v\`.
+- If `k > tot`, then `k -= tot` and try the next edge.
+- Else if `k <= pref`, the answer ends on this edge:
+    - Let $t = \lceil k / occ[v] \rceil$ (1..len), then take the first `t` characters of the edge label.
+- Else (`k > pref`):
+    - `k -= pref`, append the whole edge label, and descend into `v`.
 
 This returns the k-th substring **with duplicates**.
 
 **Complexity:**
-- SA build + LCP: depends on your SA implementation (\`O(n log^2 n)\` for sort-based doubling, \`O(n log n)\` for radix-doubling).
-- Tree build from SA+LCP: \`O(n)\` nodes/edges, \`O(n)\` stack operations.
-- Postorder to compute \`occ/sub\`: \`O(n)\`.
-- Query (k-th): \`O(answer length + number of visited edges)\`.
+- SA build + LCP: depends on your SA implementation (`O(n log^2 n)` for sort-based doubling, `O(n log n)` for radix-doubling).
+- Tree build from SA+LCP: `O(n)` nodes/edges, `O(n)` stack operations.
+- Postorder to compute `occ/sub`: `O(n)`.
+- Query (k-th): `O(answer length + number of visited edges)`.
 
 ---
 
 ### 13) Longest repeated substring with **no overlap**
 
-**Problem:** Find the maximum length \`L\` such that there exists a substring of length \`L\` that appears at least twice **without overlapping**.
+**Problem:** Find the maximum length `L` such that there exists a substring of length `L` that appears at least twice **without overlapping**.
 
-Meaning: there exist positions \`i != j\` with \`s.substr(i, L) == s.substr(j, L)\` and \`|i - j| >= L\`.
+Meaning: there exist positions `i != j` with `s.substr(i, L) == s.substr(j, L)` and `|i - j| >= L`.
 
 **Key idea:**
-- For a fixed \`L\`, all suffixes that share prefix length \`>= L\` form groups in SA where \`lcp\` values are \`>= L\`.
-- In each group, if \`maxPos - minPos >= L\`, then you have two occurrences that don’t overlap.
+- For a fixed `L`, all suffixes that share prefix length `>= L` form groups in SA where `lcp` values are `>= L`.
+- In each group, if `maxPos - minPos >= L`, then you have two occurrences that don’t overlap.
 
-Binary search on \`L\` gives \`O(n log n)\` (group scan is \`O(n)\` per check).
+Binary search on `L` gives `O(n log n)` (group scan is `O(n)` per check).
 
-\`\`\`cpp
+```cpp
 bool has_non_overlapping_repeat(const SuffixArray& sa, int L) {
     if (L == 0) return true;
     int n = sa.n;
@@ -702,10 +707,10 @@ int longest_non_overlapping_repeat(const SuffixArray& sa) {
 SuffixArray sa(s);
 sa.build_lcp();
 cout << longest_non_overlapping_repeat(sa) << "\n";
-\`\`\`
+```
 
 Main point:
-- \`longest_non_overlapping_repeat\` returns only the length; if you also want the substring itself, we can extend the check to remember the best group.
+- `longest_non_overlapping_repeat` returns only the length; if you also want the substring itself, we can extend the check to remember the best group.
 
 ---
 
@@ -717,22 +722,22 @@ Suffix Array is worth thinking about when the problem is essentially asking abou
 Think of SA as:
 
 1) **All suffixes sorted** → any operation that needs “lexicographic order of substrings” becomes systematic.
-2) **All occurrences of a pattern are contiguous in SA** → binary search on SA gives range \`[L, R)\`.
+2) **All occurrences of a pattern are contiguous in SA** → binary search on SA gives range `[L, R)`.
 3) **LCP between adjacent suffixes** → repeated-substring facts become simple (max LCP, sum LCP, window min of LCP).
-4) With RMQ on \`lcp[]\`, you get **LCP of any two suffixes in O(1)** → fast substring compare.
+4) With RMQ on `lcp[]`, you get **LCP of any two suffixes in O(1)** → fast substring compare.
 
 ### Typical problem types (signals → SA approach)
 
 #### A) Pattern queries on one big text
 **Signals:**
-- One text \`s\` (length up to ~2e5–5e5), many queries \`q\` (patterns / ask counts / existence).
-- “How many times does \`p\` occur?” “Does \`p\` occur?” “Find all positions.”
+- One text `s` (length up to ~2e5–5e5), many queries `q` (patterns / ask counts / existence).
+- “How many times does `p` occur?” “Does `p` occur?” “Find all positions.”
 
-**Use SA because:** occurrences of \`p\` correspond to a contiguous SA interval.
+**Use SA because:** occurrences of `p` correspond to a contiguous SA interval.
 
 **Calls to use:**
-- \`sa.find_range(p)\` → \`[L,R)\`
-- \`sa.count(p)\` → number of occurrences
+- `sa.find_range(p)` → `[L,R)`
+- `sa.count(p)` → number of occurrences
 
 **Alternatives:**
 - If only 1 pattern: KMP/Z may be simpler.
@@ -748,7 +753,7 @@ Think of SA as:
 **Use SA+LCP because:** duplicates are exactly accounted by LCP sum.
 
 **Calls/arrays:**
-- \`sa.build_lcp()\`
+- `sa.build_lcp()`
 - formula: distinct non-empty = $n(n+1)/2 - \sum_{i=1}^{n-1} lcp[i]$
 
 ---
@@ -762,9 +767,9 @@ Think of SA as:
 **Use SA+LCP because:** repetition is captured by LCP.
 
 **Calls/arrays:**
-- \`sa.build_lcp()\`
-- max repeat (>=2): \`max(lcp)\`
-- repeat >= K: sliding window minimum on \`lcp\`
+- `sa.build_lcp()`
+- max repeat (>=2): `max(lcp)`
+- repeat >= K: sliding window minimum on `lcp`
 
 ---
 
@@ -773,11 +778,11 @@ Think of SA as:
 - “longest common substring” (not subsequence)
 - “common block,” “shared segment,” “max matching contiguous”
 
-**Use SA because:** build SA on \`a + sep + b\`, then check adjacent suffixes from different strings.
+**Use SA because:** build SA on `a + sep + b`, then check adjacent suffixes from different strings.
 
 **Calls/arrays:**
 - build SA+LCP on concatenated string
-- take max \`lcp[i]\` where suffixes cross the separator
+- take max `lcp[i]` where suffixes cross the separator
 
 **Alternatives:**
 - Suffix automaton is also common (often O(n)).
@@ -794,8 +799,8 @@ Think of SA as:
 **Use SA+RMQ because:** LCP of suffixes makes substring comparison fast.
 
 **Calls:**
-- \`sa.build_lcp()\`
-- \`sa.compare_substrings(l1,r1,l2,r2)\`
+- `sa.build_lcp()`
+- `sa.compare_substrings(l1,r1,l2,r2)`
 
 ---
 
@@ -804,7 +809,7 @@ Think of SA as:
 - “minimum rotation,” “lexicographically smallest rotation”
 - “cyclic shift smallest”
 
-**Use SA because:** build SA on \`s+s\`, pick first suffix starting in \`[0,n)\`.
+**Use SA because:** build SA on `s+s`, pick first suffix starting in `[0,n)`.
 
 ---
 
@@ -829,9 +834,9 @@ If you answer “yes” to any, think SA.
 2) **Online edits / dynamic string** (updates between queries):
     - SA rebuild is expensive; consider suffix automaton variants, hashing with updates, or segment trees depending on task.
 
-3) **Very large \`n\` (like 1e6+) with strict time**:
-    - This note’s SA build is \`O(n log² n)\`; may TLE.
-    - Consider \`O(n log n)\` SA (radix) or SA-IS \`O(n)\` if necessary.
+3) **Very large `n` (like 1e6+) with strict time**:
+    - This note’s SA build is `O(n log² n)`; may TLE.
+    - Consider `O(n log n)` SA (radix) or SA-IS `O(n)` if necessary.
 
 4) **Need exact palindrome queries**:
     - SA can help indirectly but Manacher / palindromic tree is usually better.
@@ -856,36 +861,40 @@ If a statement contains these, SA is often intended:
 ## Must-remember contest notes (high-value details)
 
 ### 1) Pattern queries: SA is a “sorted suffix dictionary”
-When doing \`find_range(p)\` / \`count(p)\`, remember:
+When doing `find_range(p)` / `count(p)`, remember:
 
-- The matches are exactly a contiguous SA segment \`[L, R)\`.
-- \`R - L\` is the count.
-- \`sa.sa[L..R-1]\` are all starting positions (in lexicographic suffix order).
+- The matches are exactly a contiguous SA segment `[L, R)`.
+- `R - L` is the count.
+- `sa.sa[L..R-1]` are all starting positions (in lexicographic suffix order).
 
 This is the cleanest mental model for “count occurrences / list positions” problems.
 
 ---
 
 ### 2) Separator rule (two strings problems)
-When you do \`t = a + sep + b\`:
+When you do `t = a + sep + b`:
 
-- \`sep\` must be a character that does **not** appear in \`a\` or \`b\`.
-- If inputs can contain all ASCII characters, use a separator outside the alphabet by mapping to integers (or pick \`\0\` only if you’re careful with C++ strings).
+- `sep` must be a character that does **not** appear in `a` or `b`.
+- If inputs can contain all ASCII characters, use a separator outside the alphabet by mapping to integers (or pick `\0` only if you’re careful with C++ strings).
 
 Contest-safe approach:
-- If alphabet is lowercase letters, \`sep = '{'\` works.
-- If alphabet is \`a-zA-Z0-9\`, \`sep = '$'\` usually works.
+- If alphabet is lowercase letters, `sep = '{'` works.
+- If alphabet is `a-zA-Z0-9`, `sep = '$'` usually works.
 
 ---
 
 ### 3) The 3 “LCP facts” you should memorize
-After \`sa.build_lcp()\`:
+After `sa.build_lcp()`:
 
-1) **Longest repeated substring (≥2 times)** length is \`max(lcp)\`.
+1) **Longest repeated substring (≥2 times)** length is `max(lcp)`.
 2) **Distinct substrings** (non-empty) is:
-    $$n(n+1)/2 - \sum lcp$$
+    $$
+    n(n+1)/2 - \sum lcp
+    $$
 3) **Appears at least K times** is:
-    $$\max_i \min(lcp[i+1..i+K-1])$$
+    $$
+    \max_i \min(lcp[i+1..i+K-1])
+    $$
     (sliding window minimum over LCP)
 
 If a problem smells like “repeat / distinct / frequency”, these facts are usually the intended shortcut.
@@ -899,20 +908,20 @@ If you see:
 
 then SA + LCP + RMQ gives:
 
-- \`lcp_suffix(i, j)\` in **O(1)**
-- \`compare_substrings(l1,r1,l2,r2)\` in **O(1)**
+- `lcp_suffix(i, j)` in **O(1)**
+- `compare_substrings(l1,r1,l2,r2)` in **O(1)**
 
 That’s a huge upgrade vs naive comparison (which can be O(length) per query).
 
 ---
 
 ### 5) Complexity reality check (when this exact code is safe)
-This note uses \`O(n log² n)\` SA build (because of \`sort\` with a comparator).
+This note uses `O(n log² n)` SA build (because of `sort` with a comparator).
 
 Rule of thumb:
-- \`n <= 2e5\` → almost always OK
-- \`n ~ 5e5\` → often OK in C++ with fast IO, but borderline on slow judges
-- \`n >= 1e6\` → risky; consider \`O(n log n)\` (radix sorting) or SA-IS
+- `n <= 2e5` → almost always OK
+- `n ~ 5e5` → often OK in C++ with fast IO, but borderline on slow judges
+- `n >= 1e6` → risky; consider `O(n log n)` (radix sorting) or SA-IS
 
 If constraints are huge, SA might still be the right idea, but you need a faster construction.
 
@@ -920,10 +929,10 @@ If constraints are huge, SA might still be the right idea, but you need a faster
 
 ### 6) Common pitfalls (things that cause WA/TLE)
 
-1) **Forgetting \`build_lcp()\`** before using \`lcp_suffix\` or substring compare.
+1) **Forgetting `build_lcp()`** before using `lcp_suffix` or substring compare.
 2) **Wrong separator** (separator appears in strings) → false matches.
 3) **Assuming SA positions are sorted by index**: they’re sorted by suffix lexicographic order.
-4) **Very large query patterns**: \`s.compare(sa[mid], m, p)\` is O(m) each time, so total is \`O(m log n)\` per query.
+4) **Very large query patterns**: `s.compare(sa[mid], m, p)` is O(m) each time, so total is `O(m log n)` per query.
 5) **Multi-testcase**: rebuild SA per test; don’t reuse arrays without re-init.
 
 ---
@@ -941,14 +950,7 @@ If constraints are huge, SA might still be the right idea, but you need a faster
 ### 8) Quick sanity tests (debugging in 60 seconds)
 When you’re unsure your SA is correct:
 
-1) Print first few \`sa\` entries and the suffixes, verify they’re sorted.
-2) Verify inverse ranks: \`pos[sa[i]] == i\` for all \`i\`.
-3) For random \`i\`, check \`lcp_suffix(i, i) == n-i\`.
-4) For adjacent suffixes, \`lcp[i] == commonPrefixLen( s.substr(sa[i]), s.substr(sa[i-1]) )\`.
-
-
-
-`,
-};
-
-export default suffixArrayDetails;
+1) Print first few `sa` entries and the suffixes, verify they’re sorted.
+2) Verify inverse ranks: `pos[sa[i]] == i` for all `i`.
+3) For random `i`, check `lcp_suffix(i, i) == n-i`.
+4) For adjacent suffixes, `lcp[i] == commonPrefixLen( s.substr(sa[i]), s.substr(sa[i-1]) )`.

@@ -37,8 +37,8 @@ export default function AboutPage() {
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
               What started as curiosity about how computers work has evolved
               into a deep love for competitive programming, algorithm design,
-              Machine Learning and software development. Over the past 2 years,
-              I've dedicated countless hours to solving complex problems,
+              Machine Learning and software development. Over the years, I've
+              dedicated countless hours to solving complex problems,
               participating in programming contests, and building meaningful
               projects.
             </p>
@@ -59,21 +59,22 @@ export default function AboutPage() {
                 March 2026 - Present • Hybrid
               </p>
               <p className="text-gray-700 dark:text-gray-300 mt-2">
-                Working on modern software development fundamentals and
-                full-stack engineering practices.
+                Building and maintaining a dental practice management SaaS
+                platform for a US healthcare client, across UI, backend, and
+                SQL Server.
               </p>
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700 dark:text-gray-300">
                 <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
-                  HTML & CSS
+                  C# & ASP.NET Core
                 </div>
                 <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
-                  JavaScript
+                  ASP.NET Web Forms & MVC
                 </div>
                 <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
-                  C#
+                  AngularJS & jQuery
                 </div>
                 <div className="bg-white/70 dark:bg-gray-700 p-3 rounded-lg">
-                  .NET Core MVC
+                  SQL Server (T-SQL)
                 </div>
               </div>
             </div>
@@ -93,18 +94,39 @@ export default function AboutPage() {
                   University of Dhaka
                 </p>
                 <p className="text-gray-600 dark:text-gray-300">
-                  2021 - 2025
+                  Completed February 2026
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mt-2">
                   CGPA: 3.80/4.00
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mt-2">
-                  Relevant Coursework: Data Structures & Algorithms, Database
-                  Systems, Software Engineering, Computer Networks, Operating
-                  Systems, Artificial Intelligence, Machine Learning, Web
-                  Technologies
+                  Relevant Coursework: Data Structures, Algorithms, Web
+                  Development, Database Systems, Operating Systems, Computer
+                  Networks, Software Engineering, Machine Learning
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Research */}
+          <div className="bg-amber-50 dark:bg-gray-800 rounded-lg p-8 mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              Research
+            </h2>
+            <div className="border-l-4 border-amber-500 pl-6">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Spatial-Temporal Granger Causality in Event Sequences
+              </h3>
+              <p className="text-amber-700 dark:text-amber-400 font-medium">
+                Undergraduate Researcher, University of Dhaka
+              </p>
+              <p className="text-gray-600 dark:text-gray-300">Ongoing</p>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">
+                Extending the Hawkes process to capture spatial and temporal
+                Granger causality in event sequences, using MLE-SGLP and
+                event-region encoding. Validated on epidemic, crime, and
+                social network data.
+              </p>
             </div>
           </div>
 
@@ -116,7 +138,7 @@ export default function AboutPage() {
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               Competitive programming has been more than just a hobby for
               me—it's been a journey of continuous learning and
-              self-improvement. Over the past 2 years, I've solved 2000+
+              self-improvement. Over the years, I've solved 2000+
               problems across various platforms and have participated in 15+
               contests.
             </p>
@@ -127,9 +149,9 @@ export default function AboutPage() {
                   Platforms
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• Codeforces - Expert Level</li>
-                  <li>• CodeChef - 5 Star</li>
-                  <li>• AtCoder - Cyan</li>
+                  <li>• Codeforces - Expert (Max 1938, Candidate Master)</li>
+                  <li>• CodeChef - 5 Star (Max 2020)</li>
+                  <li>• AtCoder - Cyan (Max 1571)</li>
                 </ul>
               </div>
               <div>
@@ -139,8 +161,10 @@ export default function AboutPage() {
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li>• 2000+ problems solved across all platforms</li>
                   <li>• Participated in 15+ contests</li>
-                  <li>• Expert rating on Codeforces</li>
+                  <li>• Candidate Master peak on Codeforces</li>
                   <li>• 5 Star rating on CodeChef</li>
+                  <li>• 5th, ICPC Dhaka Regional Preliminary 2025</li>
+                  <li>• 5th, IUT 12th ICT Fest IUPC 2026</li>
                   <li>• Top 10 in Different IUPC contests</li>
                   <li>• Active participant in university contests</li>
                   <li>• Growing competitive programming profile</li>
@@ -166,9 +190,26 @@ export default function AboutPage() {
                   March 2026 - Present
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mt-2">
-                  Working with HTML, CSS, JavaScript, C#, and .NET Core MVC in
-                  a hybrid setup.
+                  Dental practice management SaaS for a US healthcare client.
                 </p>
+                <ul className="mt-2 space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>
+                    • Fixed production bugs in Reports, eSign, and Clinical
+                    Notes across UI, backend, and SQL Server stored procedures
+                  </li>
+                  <li>
+                    • Built an AI-assisted bug-solving pipeline with Claude Code
+                    skills and subagents
+                  </li>
+                  <li>
+                    • Use an AI-first workflow with MCP integrations for Jira
+                    and Azure DevOps
+                  </li>
+                  <li>
+                    • Work across legacy ASP.NET Web Forms and ASP.NET Core, and
+                    write T-SQL in a HIPAA-compliant environment
+                  </li>
+                </ul>
               </div>
               <div className="border-l-4 border-teal-500 pl-6">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -250,23 +291,50 @@ export default function AboutPage() {
                       Programming Languages
                     </h4>
                     <p className="text-gray-700 dark:text-gray-300 text-sm">
-                      C++, Python, JavaScript, Java, TypeScript
+                      C#, C++, C, Python, Java, JavaScript, TypeScript, T-SQL
                     </p>
                   </div>
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-white">
-                      Web Technologies
+                      Frameworks
                     </h4>
                     <p className="text-gray-700 dark:text-gray-300 text-sm">
-                      React, Next.js, Node.js, Express, MongoDB
+                      ASP.NET Core, ASP.NET MVC, ASP.NET Web Forms, AngularJS,
+                      React.js, Node.js, Spring Boot, FastAPI
                     </p>
                   </div>
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-white">
-                      Tools & Technologies
+                      Web
                     </h4>
                     <p className="text-gray-700 dark:text-gray-300 text-sm">
-                      Git, Docker, AWS, PostgreSQL, Linux
+                      HTML5, CSS3, jQuery, Bootstrap, Razor, AJAX, REST APIs
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 dark:text-white">
+                      Databases
+                    </h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                      SQL Server, MySQL, PostgreSQL, SQLite
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 dark:text-white">
+                      Tools
+                    </h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                      Git, Azure DevOps, Jira, Visual Studio, VS Code, SSMS,
+                      Firebase, Linux
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 dark:text-white">
+                      AI-First Development
+                    </h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                      Claude Code, agentic workflows, skills and subagents, MCP,
+                      prompt engineering
                     </p>
                   </div>
                 </div>
@@ -293,11 +361,10 @@ export default function AboutPage() {
               Goals & Vision
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              As I approach graduation in 2025, I'm excited about the
-              opportunities that lie ahead. My goal is to work as a software
-              engineer or ML engineer where I can apply my problem-solving
-              skills and passion for technology to build meaningful products
-              that make a positive impact. I'm particularly drawn to the
+              Having completed my degree in February 2026, I'm now growing as a
+              software engineer at Enosis Solutions BD. My goal is to keep
+              applying my problem-solving skills and passion for technology to
+              build meaningful products that make a positive impact. I'm particularly drawn to the
               intersection of algorithms, machine learning, and software
               engineering.
             </p>
@@ -331,7 +398,7 @@ export default function AboutPage() {
                     Email:{" "}
                   </span>
                   <span className="text-blue-600 dark:text-blue-400">
-                    sistahak900@gmail.com
+                    istahakislam@gmail.com
                   </span>
                 </div>
                 <div>

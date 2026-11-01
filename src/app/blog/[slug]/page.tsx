@@ -1,65 +1,27 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { blogPosts } from "@/data/blog";
-import MarkdownContent from "@/components/MarkdownContent";
-
-// Define the BlogDetail interface here since it's used across multiple files
-export interface BlogDetail {
-  slug: string;
-  title: string;
-  content: string;
-  tableOfContents?: {
-    title: string;
-    anchor: string;
-    level: number;
-  }[];
-  codeExamples?: {
-    title: string;
-    language: string;
-    code: string;
-    explanation?: string;
-  }[];
-  relatedTopics?: string[];
-  practiceProblems?: {
-    title: string;
-    platform: string;
-    difficulty: string;
-    link: string;
-  }[];
-  references?: {
-    title: string;
-    url: string;
-  }[];
-}
+import "katex/dist/katex.min.css";
+import "remark-github-blockquote-alert/alert.css";
+import { getAllPosts, getPost, renderPost } from "@/lib/blog";
+import { tagSlug } from "@/lib/tags";
+import TableOfContents from "@/components/blog/TableOfContents";
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
 }
 
-const detailLoaders: Record<string, () => Promise<BlogDetail>> = {
-  "dp-on-trees": async () => (await import("@/data/blog-details/dp-on-trees")).default,
-  "suffix-array-notes": async () =>
-    (await import("@/data/blog-details/suffix-array-notes")).default,
-  "suffix-automaton": async () =>
-    (await import("@/data/blog-details/suffix-automaton")).default,
-  "dynamic-tree-diameter": async () =>
-    (await import("@/data/blog-details/dynamic-tree-diameter")).default,
-};
+export const dynamicParams = false;
 
-// Generate static paths for all blog posts
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
-// Generate metadata for SEO
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = getPost(slug);
 
   if (!post) {
     return {
@@ -70,14 +32,14 @@ export async function generateMetadata({
   return {
     title: `${post.title} | Istahak Islam`,
     description: post.excerpt,
-    keywords: post.tags?.join(", "),
-    authors: [{ name: post.author || "Istahak Islam" }],
+    keywords: post.tags.join(", "),
+    authors: [{ name: "Istahak Islam" }],
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
       publishedTime: post.date,
-      authors: [post.author || "Istahak Islam"],
+      authors: ["Istahak Islam"],
       tags: post.tags,
     },
     twitter: {
@@ -88,250 +50,122 @@ export async function generateMetadata({
   };
 }
 
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 export default async function BlogPost({ params }: BlogPageProps) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = getPost(slug);
 
   if (!post) {
     notFound();
   }
 
-  // Dynamically import the blog detail
-  let blogDetail: BlogDetail | null = null;
-
-  if (post.detailsFile) {
-    try {
-      const loadDetail = detailLoaders[post.detailsFile];
-      if (loadDetail) {
-        blogDetail = await loadDetail();
-      }
-    } catch (error) {
-      console.error(
-        `Failed to load blog details for ${post.detailsFile}:`,
-        error
-      );
-    }
-  }
+  const { content, headings } = await renderPost(post.body);
+  const posts = getAllPosts();
+  const index = posts.findIndex((p) => p.slug === slug);
+  // Posts are sorted newest first, so the next post is the one before it.
+  const newer = posts[index - 1];
+  const older = posts[index + 1];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Blog Header */}
-        <header className="mb-8">
-          <div className="mb-4">
-            <span className="inline-block px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">
-              {post.category}
-            </span>
-          </div>
+    <div className="bg-white dark:bg-gray-900">
+      <div className="mx-auto max-w-7xl px-4 py-10 font-sans sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12 lg:px-8">
+        <div className="mx-auto w-full max-w-[60rem]">
+          <header className="mb-8">
+            <Link
+              href="/blog"
+              className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+            >
+              ← All posts
+            </Link>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            {post.title}
-          </h1>
-
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-            {post.excerpt}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              <span>By {post.author || "Istahak Islam"}</span>
+            <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+              <span>
+                Last update: <time dateTime={post.date}>{formatDate(post.date)}</time>
+              </span>
+              <span aria-hidden>·</span>
+              <span>{post.readingMinutes} min read</span>
+              <span className="rounded bg-gray-100 px-1.5 py-0.5 text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                {post.category}
+              </span>
             </div>
-            <div className="flex items-center gap-2">
-              <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>{post.readTime}</span>
-            </div>
-          </div>
 
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4">
+            <h1 className="mt-3 text-[2rem] leading-tight font-light text-gray-900 dark:text-white">
+              {post.title}
+            </h1>
+
+            <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-sm">
               {post.tags.map((tag) => (
-                <span
+                <Link
                   key={tag}
-                  className="px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full"
+                  href={`/blog?tag=${tagSlug(tag)}`}
+                  className="text-indigo-700 hover:underline dark:text-indigo-300"
                 >
-                  {tag}
-                </span>
+                  #{tagSlug(tag)}
+                </Link>
               ))}
             </div>
-          )}
-        </header>
+          </header>
 
-        {/* Blog Content */}
-        <article className="prose prose-lg dark:prose-invert max-w-none">
-          {blogDetail ? (
-            <div>
-              {/* Table of Contents */}
-              {blogDetail.tableOfContents &&
-                blogDetail.tableOfContents.length > 0 && (
-                  <div className="mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
-                      Table of Contents
-                    </h2>
-                    <ul className="space-y-2">
-                      {blogDetail.tableOfContents.map((item, index) => (
-                        <li
-                          key={index}
-                          className={`ml-${(item.level - 2) * 4}`}
-                        >
-                          <a
-                            href={`#${item.anchor}`}
-                            className="text-blue-600 dark:text-blue-400 hover:underline"
-                          >
-                            {item.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-              {/* Main Content */}
-              <div className="mb-8">
-                <MarkdownContent content={blogDetail.content} />
+          {headings.length > 0 && (
+            <details className="mb-10 rounded-lg border border-gray-200 p-4 lg:hidden dark:border-gray-700">
+              <summary className="cursor-pointer text-sm font-semibold text-gray-900 dark:text-white">
+                Table of contents
+              </summary>
+              <div className="mt-4">
+                <TableOfContents headings={headings} />
               </div>
-
-              {/* Code Examples */}
-              {blogDetail.codeExamples &&
-                blogDetail.codeExamples.length > 0 && (
-                  <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                      Code Examples
-                    </h2>
-                    <div className="space-y-6">
-                      {blogDetail.codeExamples.map((example, index) => (
-                        <div
-                          key={index}
-                          className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6"
-                        >
-                          <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
-                            {example.title}
-                          </h3>
-                          <pre className="bg-gray-900 dark:bg-gray-950 text-green-400 p-4 rounded-lg overflow-x-auto">
-                            <code className={`language-${example.language}`}>
-                              {example.code}
-                            </code>
-                          </pre>
-                          {example.explanation && (
-                            <p className="text-gray-600 dark:text-gray-300 mt-3">
-                              {example.explanation}
-                            </p>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-              {/* Practice Problems */}
-              {blogDetail.practiceProblems &&
-                blogDetail.practiceProblems.length > 0 && (
-                  <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                      Practice Problems
-                    </h2>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      {blogDetail.practiceProblems.map((problem, index) => (
-                        <a
-                          key={index}
-                          href={problem.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                        >
-                          <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                            {problem.title}
-                          </h3>
-                          <div className="flex justify-between items-center text-sm">
-                            <span className="text-blue-600 dark:text-blue-400">
-                              {problem.platform}
-                            </span>
-                            <span
-                              className={`px-2 py-1 rounded text-xs font-medium ${
-                                problem.difficulty === "Easy"
-                                  ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                                  : problem.difficulty === "Medium"
-                                  ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
-                                  : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-                              }`}
-                            >
-                              {problem.difficulty}
-                            </span>
-                          </div>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-              {/* Related Topics */}
-              {blogDetail.relatedTopics &&
-                blogDetail.relatedTopics.length > 0 && (
-                  <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                      Related Topics
-                    </h2>
-                    <div className="flex flex-wrap gap-2">
-                      {blogDetail.relatedTopics.map((topic, index) => (
-                        <span
-                          key={index}
-                          className="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full"
-                        >
-                          {topic}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-              {/* References */}
-              {blogDetail.references && blogDetail.references.length > 0 && (
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                    References
-                  </h2>
-                  <ul className="space-y-2">
-                    {blogDetail.references.map((reference, index) => (
-                      <li key={index}>
-                        <a
-                          href={reference.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 dark:text-blue-400 hover:underline"
-                        >
-                          {reference.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <p className="text-gray-600 dark:text-gray-300">
-                Blog content is being updated. Please check back soon!
-              </p>
-            </div>
+            </details>
           )}
-        </article>
 
-        {/* Back to Blog Link */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <Link
-            href="/blog"
-            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            ← Back to Blog
-          </Link>
+          <article className="blog-prose prose prose-gray max-w-none dark:prose-invert">
+            {content}
+          </article>
+
+          <nav className="mt-16 grid gap-4 border-t border-gray-200 pt-8 sm:grid-cols-2 dark:border-gray-700">
+            {older ? (
+              <Link
+                href={`/blog/${older.slug}`}
+                className="rounded-lg border border-gray-200 p-4 hover:border-blue-500 dark:border-gray-700 dark:hover:border-blue-400"
+              >
+                <span className="text-sm text-gray-500 dark:text-gray-400">← Older</span>
+                <span className="mt-1 block font-medium text-gray-900 dark:text-white">
+                  {older.title}
+                </span>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {newer && (
+              <Link
+                href={`/blog/${newer.slug}`}
+                className="rounded-lg border border-gray-200 p-4 text-right hover:border-blue-500 dark:border-gray-700 dark:hover:border-blue-400"
+              >
+                <span className="text-sm text-gray-500 dark:text-gray-400">Newer →</span>
+                <span className="mt-1 block font-medium text-gray-900 dark:text-white">
+                  {newer.title}
+                </span>
+              </Link>
+            )}
+          </nav>
         </div>
+
+        {headings.length > 0 && (
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+              <p className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                Table of contents
+              </p>
+              <TableOfContents headings={headings} />
+            </div>
+          </aside>
+        )}
       </div>
     </div>
   );
