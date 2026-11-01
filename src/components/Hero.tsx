@@ -148,7 +148,7 @@ const Hero = () => {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/in/md-istahak-islam-267867227/"
+              href="https://www.linkedin.com/in/md-istahak-islam/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transform hover:scale-110 transition-all duration-200"
@@ -162,7 +162,7 @@ const Hero = () => {
               </svg>
             </a>
             <a
-              href="https://codeforces.com/profile/_0Istahak"
+              href="https://codeforces.com/profile/Istahak16"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transform hover:scale-110 transition-all duration-200"

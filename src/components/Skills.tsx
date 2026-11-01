@@ -5,18 +5,18 @@ const Skills = () => {
       skills: [
         { name: "C++", level: 95, color: "bg-blue-500" },
         { name: "Python", level: 90, color: "bg-green-500" },
-        { name: "JavaScript", level: 85, color: "bg-yellow-500" },
+        { name: "C#", level: 85, color: "bg-purple-600" },
         { name: "Java", level: 80, color: "bg-red-500" },
         { name: "TypeScript", level: 85, color: "bg-blue-600" },
       ],
     },
     {
-      title: "Web Development",
+      title: "Frameworks & Web",
       skills: [
+        { name: "ASP.NET Core", level: 85, color: "bg-purple-500" },
         { name: "React.js", level: 90, color: "bg-cyan-500" },
-        { name: "Next.js", level: 85, color: "bg-gray-900" },
         { name: "Node.js", level: 80, color: "bg-green-600" },
-        { name: "Express.js", level: 75, color: "bg-gray-600" },
+        { name: "Spring Boot", level: 75, color: "bg-green-500" },
         { name: "HTML/CSS", level: 90, color: "bg-orange-500" },
       ],
     },
@@ -34,10 +34,10 @@ const Skills = () => {
       title: "Tools & Technologies",
       skills: [
         { name: "Git", level: 90, color: "bg-orange-600" },
-        { name: "Docker", level: 70, color: "bg-blue-400" },
-        { name: "MongoDB", level: 80, color: "bg-green-700" },
+        { name: "SQL Server", level: 85, color: "bg-red-600" },
         { name: "PostgreSQL", level: 75, color: "bg-blue-700" },
-        { name: "AWS", level: 65, color: "bg-orange-400" },
+        { name: "Azure DevOps", level: 75, color: "bg-blue-400" },
+        { name: "Claude Code", level: 85, color: "bg-orange-400" },
       ],
     },
   ];
@@ -131,11 +131,11 @@ const Skills = () => {
 
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
               <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                Expert
+                1938
               </div>
               <div className="text-gray-600 dark:text-gray-300">Codeforces</div>
               <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Highest Rating (1764)
+                Max Rating (Candidate Master)
               </div>
             </div>
 

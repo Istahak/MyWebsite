@@ -76,7 +76,7 @@ export default function ContactPage() {
       setError(
         `Failed to send message: ${
           error instanceof Error ? error.message : "Unknown error"
-        }. Please try contacting me directly at sistahak900@gmail.com`
+        }. Please try contacting me directly at istahakislam@gmail.com`
       );
     } finally {
       setIsSubmitting(false);
@@ -108,7 +108,7 @@ export default function ContactPage() {
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Thank you for reaching out! Your message has been sent directly to
-              sistahak900@gmail.com. I'll get back to you as soon as possible.
+              istahakislam@gmail.com. I'll get back to you as soon as possible.
             </p>
             <button
               onClick={() => setSubmitted(false)}
@@ -173,10 +173,10 @@ export default function ContactPage() {
                     Email
                   </h3>
                   <Link
-                    href="mailto:sistahak900@gmail.com"
+                    href="mailto:istahakislam@gmail.com"
                     className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
                   >
-                    sistahak900@gmail.com
+                    istahakislam@gmail.com
                   </Link>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                     Best for job opportunities and formal inquiries
@@ -199,7 +199,7 @@ export default function ContactPage() {
                     LinkedIn
                   </h3>
                   <Link
-                    href="https://www.linkedin.com/in/md-istahak-islam-267867227/"
+                    href="https://www.linkedin.com/in/md-istahak-islam/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -255,7 +255,7 @@ export default function ContactPage() {
                     Codeforces
                   </h3>
                   <Link
-                    href="https://codeforces.com/profile/_0Istahak"
+                    href="https://codeforces.com/profile/Istahak16"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"

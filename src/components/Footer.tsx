@@ -71,7 +71,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/in/md-istahak-islam-267867227/"
+                href="https://www.linkedin.com/in/md-istahak-islam/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -85,7 +85,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="mailto:sistahak900@gmail.com"
+                href="mailto:istahakislam@gmail.com"
                 className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
               >
                 <svg
