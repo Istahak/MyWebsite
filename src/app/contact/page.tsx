@@ -1,8 +1,51 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { Icon } from "@/components/ui/Icon";
+import {
+  Backdrop,
+  PageHeader,
+  PageShell,
+  Tile,
+  TileLabel,
+} from "@/components/ui/Tile";
+
+// `invert` marks black logos that need flipping on dark backgrounds.
+const profiles = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/md-istahak-islam/",
+    logo: "/icons/tech/linkedin.svg",
+    note: "Professional networking and career discussions",
+    invert: false,
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/Istahak",
+    logo: "/icons/tech/github.svg",
+    note: "Check out my code and open source contributions",
+    invert: true,
+  },
+  {
+    name: "Codeforces",
+    href: "https://codeforces.com/profile/Istahak16",
+    logo: "/icons/Codeforces.colored.svg",
+    note: "Competitive programming discussions and mentoring",
+    invert: false,
+  },
+];
+
+const responseTimes = [
+  { label: "Job Inquiries", time: "Within 24 hours" },
+  { label: "General Questions", time: "1-2 business days" },
+  { label: "Collaboration", time: "Within 48 hours" },
+];
+
+const inputClass =
+  "w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-gray-900 transition-colors placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-gray-500";
+const labelClass =
+  "mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -85,77 +128,66 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 flex items-center justify-center">
-        <div className="max-w-md mx-auto text-center">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
-            <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg
-                className="w-8 h-8 text-green-600 dark:text-green-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Message Sent Successfully!
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Thank you for reaching out! Your message has been sent directly to
-              istahakislam@gmail.com. I'll get back to you as soon as possible.
-            </p>
-            <button
-              onClick={() => setSubmitted(false)}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+      <PageShell width="max-w-xl">
+        <Tile className="items-center p-8 text-center">
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100 dark:bg-green-500/15">
+            <svg
+              className="h-7 w-7 text-green-600 dark:text-green-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              Send Another Message
-            </button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
           </div>
-        </div>
-      </div>
+          <h2 className="mb-3 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            Message Sent Successfully!
+          </h2>
+          <p className="mb-6 text-gray-600 dark:text-gray-300">
+            Thank you for reaching out! Your message has been sent directly to
+            istahakislam@gmail.com. I&apos;ll get back to you as soon as possible.
+          </p>
+          <button
+            onClick={() => setSubmitted(false)}
+            className="rounded-full bg-indigo-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
+          >
+            Send Another Message
+          </button>
+        </Tile>
+      </PageShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Get In Touch
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            I'm always open to discussing new opportunities, collaborations, or
-            just having a chat about technology and competitive programming.
+    <PageShell>
+      <PageHeader label="Contact" title="Get In Touch" icon="mail">
+        I&apos;m always open to discussing new opportunities, collaborations, or
+        just having a chat about technology and competitive programming.
+      </PageHeader>
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <Tile className="lg:col-span-2 lg:p-8">
+          <TileLabel icon="send">Send a message</TileLabel>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            Let&apos;s Connect
+          </h2>
+          <p className="mb-6 mt-2 leading-relaxed text-gray-600 dark:text-gray-300">
+            Whether you&apos;re a recruiter looking for a passionate developer, a
+            fellow programmer wanting to collaborate, or someone interested in
+            competitive programming, I&apos;d love to hear from you!
           </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Let's Connect
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                Whether you're a recruiter looking for a passionate developer, a
-                fellow programmer wanting to collaborate, or someone interested
-                in competitive programming, I'd love to hear from you!
-              </p>
-            </div>
-
-            {/* Contact Methods */}
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+          {error && (
+            <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 dark:border-red-500/30 dark:bg-red-500/10">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
                   <svg
-                    className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                    className="h-5 w-5 text-red-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -164,158 +196,27 @@ export default function ContactPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
                 </div>
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                    Email
+                <div className="ml-3 min-w-0">
+                  <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
+                    Error sending message
                   </h3>
-                  <Link
-                    href="mailto:istahakislam@gmail.com"
-                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                  >
-                    istahakislam@gmail.com
-                  </Link>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Best for job opportunities and formal inquiries
+                  <p className="mt-1 break-words text-sm text-red-700 dark:text-red-300">
+                    {error}
                   </p>
                 </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-green-600 dark:text-green-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
+                <div className="ml-auto pl-3">
+                  <button
+                    type="button"
+                    onClick={() => setError(null)}
+                    aria-label="Dismiss error"
+                    className="inline-flex text-red-400 hover:text-red-600 dark:text-red-300 dark:hover:text-red-100"
                   >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                    LinkedIn
-                  </h3>
-                  <Link
-                    href="https://www.linkedin.com/in/md-istahak-islam/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                  >
-                    Connect on LinkedIn
-                  </Link>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Professional networking and career discussions
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-gray-600 dark:text-gray-300"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                    GitHub
-                  </h3>
-                  <Link
-                    href="https://github.com/Istahak"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                  >
-                    View GitHub Profile
-                  </Link>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Check out my code and open source contributions
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center">
-                  <Image
-                    src="/icons/Codeforces.colored.svg"
-                    alt="Codeforces"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                    Codeforces
-                  </h3>
-                  <Link
-                    href="https://codeforces.com/profile/Istahak16"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                  >
-                    View Codeforces Profile
-                  </Link>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Competitive programming discussions and mentoring
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Response Times */}
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-                Response Time
-              </h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">
-                    Job Inquiries
-                  </span>
-                  <span className="text-green-600 dark:text-green-400 font-medium">
-                    Within 24 hours
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">
-                    General Questions
-                  </span>
-                  <span className="text-blue-600 dark:text-blue-400 font-medium">
-                    1-2 business days
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">
-                    Collaboration
-                  </span>
-                  <span className="text-purple-600 dark:text-purple-400 font-medium">
-                    Within 48 hours
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Send a Message
-            </h2>
-
-            {/* Error Message */}
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
                     <svg
-                      className="w-5 h-5 text-red-400"
+                      className="h-5 w-5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -324,49 +225,19 @@ export default function ContactPage() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
-                  </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
-                      Error sending message
-                    </h3>
-                    <p className="mt-1 text-sm text-red-700 dark:text-red-300">
-                      {error}
-                    </p>
-                  </div>
-                  <div className="ml-auto pl-3">
-                    <button
-                      type="button"
-                      onClick={() => setError(null)}
-                      className="inline-flex text-red-400 hover:text-red-600 dark:text-red-300 dark:hover:text-red-100"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
+                  </button>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
+                <label htmlFor="name" className={labelClass}>
                   Name *
                 </label>
                 <input
@@ -376,16 +247,13 @@ export default function ContactPage() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+                  className={inputClass}
                   placeholder="Your full name"
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
+                <label htmlFor="email" className={labelClass}>
                   Email *
                 </label>
                 <input
@@ -395,111 +263,154 @@ export default function ContactPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
+                  className={inputClass}
                   placeholder="your.email@example.com"
                 />
               </div>
-
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Subject *
-                </label>
-                <select
-                  id="subject"
-                  name="subject"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200"
-                >
-                  <option value="">Select a subject</option>
-                  <option value="job">Job Opportunity</option>
-                  <option value="collaboration">Collaboration</option>
-                  <option value="mentoring">Mentoring/Learning</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={6}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-200 resize-none"
-                  placeholder="Tell me about your inquiry, project, or opportunity..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105 disabled:transform-none flex items-center justify-center space-x-2"
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg
-                      className="animate-spin w-5 h-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Send Message</span>
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                      />
-                    </svg>
-                  </>
-                )}
-              </button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                * Required fields. I typically respond within 24-48 hours.
-              </p>
             </div>
-          </div>
+
+            <div>
+              <label htmlFor="subject" className={labelClass}>
+                Subject *
+              </label>
+              <select
+                id="subject"
+                name="subject"
+                required
+                value={formData.subject}
+                onChange={handleChange}
+                className={inputClass}
+              >
+                <option value="">Select a subject</option>
+                <option value="job">Job Opportunity</option>
+                <option value="collaboration">Collaboration</option>
+                <option value="mentoring">Mentoring/Learning</option>
+                <option value="general">General Inquiry</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="message" className={labelClass}>
+                Message *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={6}
+                value={formData.message}
+                onChange={handleChange}
+                className={`${inputClass} resize-none`}
+                placeholder="Tell me about your inquiry, project, or opportunity..."
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+            >
+              {isSubmitting ? (
+                <>
+                  <svg
+                    className="h-5 w-5 animate-spin"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  <span>Sending...</span>
+                </>
+              ) : (
+                <>
+                  <span>Send Message</span>
+                  <Icon name="send" className="h-4 w-4" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">
+            * Required fields. I typically respond within 24-48 hours.
+          </p>
+        </Tile>
+
+        <div className="space-y-4">
+          <Tile tint="sky">
+            <Backdrop pattern="dots" glow="bg-sky-400/20 dark:bg-sky-500/15" />
+            <TileLabel icon="mail">Email</TileLabel>
+            <a
+              href="mailto:istahakislam@gmail.com"
+              className="mt-3 break-all text-lg font-semibold tracking-tight text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+            >
+              istahakislam@gmail.com
+            </a>
+            <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+              Best for job opportunities and formal inquiries
+            </p>
+          </Tile>
+
+          <Tile>
+            <TileLabel icon="globe">Elsewhere</TileLabel>
+            <ul className="mt-3 space-y-1">
+              {profiles.map((profile) => (
+                <li key={profile.name}>
+                  <a
+                    href={profile.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group -mx-2 flex items-center gap-3 rounded-xl p-2 transition-colors hover:bg-gray-50 dark:hover:bg-white/5"
+                  >
+                    <Image
+                      src={profile.logo}
+                      alt=""
+                      width={20}
+                      height={20}
+                      className={`h-5 w-5 shrink-0 ${profile.invert ? "dark:invert" : ""}`}
+                    />
+                    <span className="min-w-0">
+                      <span className="block text-sm font-medium text-gray-900 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                        {profile.name}
+                        <span className="ml-1 text-gray-400">↗</span>
+                      </span>
+                      <span className="block text-xs text-gray-500 dark:text-gray-400">
+                        {profile.note}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Tile>
+
+          <Tile>
+            <TileLabel icon="clock">Response time</TileLabel>
+            <dl className="mt-3 space-y-2 text-sm">
+              {responseTimes.map((row) => (
+                <div key={row.label} className="flex justify-between gap-4">
+                  <dt className="text-gray-600 dark:text-gray-300">{row.label}</dt>
+                  <dd className="text-right font-medium text-gray-900 dark:text-white">
+                    {row.time}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Tile>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

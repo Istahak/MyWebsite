@@ -30,7 +30,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
             href={`#${id}`}
             className={`block leading-snug transition-colors ${
               activeId === id
-                ? "font-medium text-blue-600 dark:text-blue-400"
+                ? "font-medium text-indigo-600 dark:text-indigo-400"
                 : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
             }`}
           >

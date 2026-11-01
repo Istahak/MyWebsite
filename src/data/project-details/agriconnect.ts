@@ -7,27 +7,13 @@ export interface ProjectDetail {
 export const agriconnectDetails: ProjectDetail = {
   slug: 'agriconnect',
   title: 'AgriConnect - Smart Farming Social Platform',
-  content: `# 🌾 AgriConnect - Smart Farming Social Platform
+  content: `A comprehensive full-stack web application designed to empower farmers with modern technology, providing agricultural information, community support, AI assistance, and farm management tools all in one platform.
 
-A comprehensive full-stack web application designed to empower farmers with modern technology, providing agricultural information, community support, AI assistance, and farm management tools all in one platform.
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Technology Stack](#technology-stack)
-- [System Architecture](#system-architecture)
-- [Features in Detail](#features-in-detail)
-- [Installation & Setup](#installation--setup)
-- [API Endpoints](#api-endpoints)
-- [Project Structure](#project-structure)
-- [Future Enhancements](#future-enhancements)
-
-## 🎯 Overview
+## Overview
 
 AgriConnect is a social networking platform specifically designed for the agricultural community. It combines social media features with agricultural information systems, AI-powered assistance, weather forecasting, and task management to create a comprehensive digital ecosystem for farmers.
 
-## ✨ Key Features
+## Key Features
 
 ### 1. **User Authentication & Authorization**
 
@@ -120,7 +106,7 @@ AgriConnect is a social networking platform specifically designed for the agricu
 - User activity tracking
 - Interaction history
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
 
@@ -178,7 +164,7 @@ AgriConnect is a social networking platform specifically designed for the agricu
 - Tasks
 - Crop Information
 
-## 🏗️ System Architecture
+## System Architecture
 
 \`\`\`
 ┌─────────────────────────────────────────┐
@@ -227,7 +213,7 @@ AgriConnect is a social networking platform specifically designed for the agricu
 └──────────────┘  └──────────────┘
 \`\`\`
 
-## 📱 Features in Detail
+## Features in Detail
 
 ### Social Timeline System
 
@@ -301,7 +287,7 @@ Connect with agricultural experts who have:
 - Real-time chat availability
 - Response history
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 
@@ -366,7 +352,7 @@ DATABASE_URL=sqlite:///./test.db
 
 For production, update the database URL to use PostgreSQL or MySQL.
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Authentication
 
@@ -423,7 +409,7 @@ For production, update the database URL to use PostgreSQL or MySQL.
 - \`POST /crop-info\` - Add crop information
 - \`DELETE /crop-info/{crop_info_id}\` - Delete crop info
 
-## 📁 Project Structure
+## Project Structure
 
 \`\`\`
 swe/
@@ -484,7 +470,7 @@ swe/
     └── tailwind.config.js
 \`\`\`
 
-## 🔐 Security Features
+## Security Features
 
 - Password hashing using bcrypt
 - JWT-based authentication
@@ -495,7 +481,7 @@ swe/
 - Protected routes with authentication middleware
 - Role-based access control
 
-## 🎨 UI/UX Highlights
+## UI/UX Highlights
 
 - Responsive design for mobile and desktop
 - Material Design principles
@@ -506,7 +492,7 @@ swe/
 - Dark/Light theme support
 - Accessible components
 
-## 📊 Database Schema
+## Database Schema
 
 ### Users Table
 
@@ -583,7 +569,7 @@ swe/
 - image_url
 - info_source
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - [ ] Real-time notifications using WebSockets
 - [ ] Mobile app development (React Native)
@@ -601,15 +587,15 @@ swe/
 - [ ] Push notifications
 - [ ] Social sharing to other platforms
 
-## 🤝 Contributing
+## Contributing
 
 This project was developed as a personal portfolio project. Feedback and suggestions are welcome!
 
-## 📝 License
+## License
 
 This project is for educational and portfolio purposes.
 
-## 👨‍💻 Developer
+## Developer
 
 Developed as a comprehensive full-stack project demonstrating modern web development practices, including:
 
@@ -622,7 +608,7 @@ Developed as a comprehensive full-stack project demonstrating modern web develop
 - State management
 - Third-party API integration
 
-## 📞 Support
+## Support
 
 For questions or support, please refer to the project documentation or create an issue in the repository.
 

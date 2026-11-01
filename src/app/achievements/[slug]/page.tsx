@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { achievements } from "@/data/achievements";
+import { Icon } from "@/components/ui/Icon";
+import { Backdrop, Chip, PageShell, Tile, TileLabel } from "@/components/ui/Tile";
 
 interface AchievementDetailsProps {
   overview?: string;
@@ -15,6 +17,19 @@ interface AchievementDetailsProps {
   reflection?: string;
   [key: string]: unknown;
 }
+
+function suffix(n: number) {
+  const tens = n % 100;
+  if (tens >= 11 && tens <= 13) return "th";
+  return ["th", "st", "nd", "rd"][n % 10] ?? "th";
+}
+
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
 export async function generateStaticParams() {
   return achievements.map((achievement) => ({
@@ -69,246 +84,225 @@ export default async function AchievementDetailPage({
     );
   }
 
+  const solved = achievement.problemsSolved ?? achievementDetails?.problemsSolved;
+  const attempted = achievementDetails?.problemsAttempted;
+  const memberCount = achievementDetails?.teamMembers?.length;
+  const topPercent = achievement.totalTeams
+    ? Math.ceil((achievement.rank / achievement.totalTeams) * 100)
+    : null;
+  const isTopTen = achievement.rank <= 10;
+  const highlights = achievementDetails?.highlights ?? [];
+  const challenges = achievementDetails?.challenges ?? [];
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <article className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
-          {/* Achievement Image */}
-          <div className="relative h-64 md:h-96 bg-gradient-to-br from-blue-500 to-purple-600">
-            <Image
-              src={achievement.image}
-              alt={achievement.title}
-              fill
-              className="object-contain"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium">
-                  {achievement.category}
-                </span>
-                {achievement.teamName && (
-                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium">
-                    Team: {achievement.teamName}
-                  </span>
-                )}
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                {achievement.title}
-              </h1>
-              <div className="flex items-center gap-4 text-sm">
-                <span>{achievement.organizer}</span>
-                <span>•</span>
-                <span>
-                  {new Date(achievement.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Key Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-gray-50 dark:bg-gray-900/50">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                #{achievement.rank}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Rank
-              </div>
-            </div>
-            {achievement.problemsSolved && (
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 dark:text-green-400">
-                  {achievement.problemsSolved}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  Problems Solved
-                </div>
-              </div>
-            )}
-            {achievement.location && (
-              <div className="text-center col-span-2">
-                <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
-                  {achievement.location}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  Location
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-          {/* Description */}
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              About This Achievement
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              {achievement.description}
-            </p>
-          </section>
-
-          {/* Additional Details */}
-          {achievementDetails && (
-            <>
-              {achievementDetails.overview && (
-                <section className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                    Overview
-                  </h2>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    {achievementDetails.overview}
-                  </p>
-                </section>
-              )}
-
-              {achievementDetails.highlights &&
-                achievementDetails.highlights.length > 0 && (
-                  <section className="mb-8">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                      Highlights
-                    </h2>
-                    <ul className="space-y-3">
-                      {achievementDetails.highlights.map(
-                        (highlight: string, index: number) => (
-                          <li
-                            key={index}
-                            className="flex items-start p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
-                          >
-                            <svg
-                              className="w-6 h-6 text-blue-600 dark:text-blue-400 mr-3 flex-shrink-0 mt-0.5"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span className="text-gray-700 dark:text-gray-300">
-                              {highlight}
-                            </span>
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </section>
-                )}
-
-              {achievementDetails.challenges &&
-                achievementDetails.challenges.length > 0 && (
-                  <section className="mb-8">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                      Challenges Faced
-                    </h2>
-                    <ul className="space-y-3">
-                      {achievementDetails.challenges.map(
-                        (challenge: string, index: number) => (
-                          <li
-                            key={index}
-                            className="flex items-start p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg"
-                          >
-                            <svg
-                              className="w-6 h-6 text-orange-600 dark:text-orange-400 mr-3 flex-shrink-0 mt-0.5"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span className="text-gray-700 dark:text-gray-300">
-                              {challenge}
-                            </span>
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </section>
-                )}
-
-              {achievementDetails.reflection && (
-                <section className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                    Reflection
-                  </h2>
-                  <div className="p-6 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-600">
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
-                      {achievementDetails.reflection}
-                    </p>
-                  </div>
-                </section>
-              )}
-            </>
-          )}
-
-          {/* Tags */}
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Tags
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {achievement.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-full text-sm font-medium"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </section>
-
-          {/* Official Link */}
-          {achievement.officialLink && (
-            <section>
-              <a
-                href={achievement.officialLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
-              >
-                View Official Results
-                <svg
-                  className="w-5 h-5 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
-            </section>
-          )}
-        </div>
-
-        {/* Back to Achievements Link */}
-        <div className="mt-8">
+    <PageShell width="max-w-4xl">
+      <article className="space-y-8">
+        <header>
           <Link
             href="/achievements"
-            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+            className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
           >
-            ← Back to All Achievements
+            <Icon name="arrowLeft" className="h-4 w-4" />
+            All achievements
           </Link>
-        </div>
+          <div className="mt-8">
+            <TileLabel icon="calendar">{formatDate(achievement.date)}</TileLabel>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+              {achievement.title}
+            </h1>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Chip>{achievement.category}</Chip>
+              {achievement.teamName && <Chip>Team: {achievement.teamName}</Chip>}
+            </div>
+            <p className="mt-4 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+              {achievement.description}
+            </p>
+          </div>
+        </header>
+
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Tile tint={isTopTen ? "amber" : "indigo"}>
+            {isTopTen && (
+              <>
+                <Backdrop glow="bg-amber-300/30 dark:bg-amber-400/15" />
+                <Icon
+                  name="trophy"
+                  className="absolute bottom-3 right-3 -z-10 h-20 w-20 text-amber-500/15 dark:text-amber-300/10"
+                />
+              </>
+            )}
+            <TileLabel icon="trophy">Rank</TileLabel>
+            <p className="mt-3 text-5xl font-semibold tracking-tight text-gray-900 tabular-nums dark:text-white">
+              {achievement.rank}
+              <span className="text-2xl">{suffix(achievement.rank)}</span>
+              {achievement.totalTeams && (
+                <span className="ml-2 text-lg font-normal text-gray-400">
+                  / {achievement.totalTeams}
+                </span>
+              )}
+            </p>
+            {topPercent !== null && (
+              <div className="mt-auto pt-4">
+                <span className="relative block h-1.5 rounded-full bg-gray-100 dark:bg-white/10">
+                  <span
+                    className="absolute inset-y-0 left-0 rounded-full bg-indigo-500/40"
+                    style={{ width: `${topPercent}%` }}
+                  />
+                  <span
+                    className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-indigo-500 dark:border-gray-950 dark:bg-indigo-400"
+                    style={{ left: `${topPercent}%` }}
+                  />
+                </span>
+                <span className="mt-1.5 block text-right font-mono text-xs text-gray-500 tabular-nums dark:text-gray-400">
+                  top {topPercent}% of {achievement.totalTeams}
+                </span>
+              </div>
+            )}
+          </Tile>
+
+          {solved !== undefined && (
+            <Tile>
+              <TileLabel icon="target">Problems solved</TileLabel>
+              <p className="mt-3 text-5xl font-semibold tracking-tight text-gray-900 tabular-nums dark:text-white">
+                {solved}
+                {attempted !== undefined && (
+                  <span className="ml-2 text-lg font-normal text-gray-400">/ {attempted}</span>
+                )}
+              </p>
+              {attempted !== undefined && (
+                <p className="mt-auto pt-3 font-mono text-xs text-gray-500 dark:text-gray-400">
+                  attempted {attempted}
+                </p>
+              )}
+            </Tile>
+          )}
+
+          {(achievement.teamName || memberCount) && (
+            <Tile>
+              <TileLabel icon="users">Team</TileLabel>
+              {achievement.teamName && (
+                <p className="mt-3 break-words font-mono text-lg font-semibold text-gray-900 dark:text-white">
+                  {achievement.teamName}
+                </p>
+              )}
+              {memberCount ? (
+                <p className="mt-auto pt-3 font-mono text-xs text-gray-500 dark:text-gray-400">
+                  {memberCount} members
+                </p>
+              ) : null}
+            </Tile>
+          )}
+
+          <Tile>
+            <TileLabel icon="calendar">Date</TileLabel>
+            <p className="mt-3 text-lg font-semibold text-gray-900 dark:text-white">
+              {formatDate(achievement.date)}
+            </p>
+            {achievementDetails?.contestDuration && (
+              <p className="mt-auto pt-3 font-mono text-xs text-gray-500 dark:text-gray-400">
+                {achievementDetails.contestDuration} contest
+              </p>
+            )}
+          </Tile>
+
+          <Tile className="sm:col-span-2">
+            <TileLabel icon="pin">{achievement.location ? "Location" : "Organizer"}</TileLabel>
+            <p className="mt-3 text-lg font-semibold text-gray-900 dark:text-white">
+              {achievement.location ?? achievement.organizer}
+            </p>
+            {achievement.location && (
+              <p className="mt-auto pt-3 font-mono text-xs text-gray-500 dark:text-gray-400">
+                organized by {achievement.organizer}
+              </p>
+            )}
+          </Tile>
+        </section>
+
+        <Tile className="h-64 overflow-hidden bg-gray-100 p-0 md:h-96 dark:bg-white/5">
+          <Image
+            src={achievement.image}
+            alt={achievement.title}
+            fill
+            className="object-contain"
+            priority
+          />
+        </Tile>
+
+        {achievementDetails?.overview && (
+          <Tile>
+            <TileLabel icon="book">Overview</TileLabel>
+            <p className="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
+              {achievementDetails.overview}
+            </p>
+          </Tile>
+        )}
+
+        {(highlights.length > 0 || challenges.length > 0) && (
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {highlights.length > 0 && (
+              <Tile>
+                <TileLabel icon="sparkles">Highlights</TileLabel>
+                <ul className="mt-4 space-y-3">
+                  {highlights.map((highlight, index) => (
+                    <li key={index} className="flex gap-3 text-gray-600 dark:text-gray-300">
+                      <span
+                        aria-hidden
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500 dark:bg-indigo-400"
+                      />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Tile>
+            )}
+            {challenges.length > 0 && (
+              <Tile>
+                <TileLabel icon="wrench">Challenges faced</TileLabel>
+                <ul className="mt-4 space-y-3">
+                  {challenges.map((challenge, index) => (
+                    <li key={index} className="flex gap-3 text-gray-600 dark:text-gray-300">
+                      <span
+                        aria-hidden
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-400 dark:bg-gray-500"
+                      />
+                      <span>{challenge}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Tile>
+            )}
+          </div>
+        )}
+
+        {achievementDetails?.reflection && (
+          <Tile>
+            <TileLabel icon="star">Reflection</TileLabel>
+            <blockquote className="mt-4 border-l-2 border-indigo-500 pl-4 italic leading-relaxed text-gray-600 dark:border-indigo-400 dark:text-gray-300">
+              {achievementDetails.reflection}
+            </blockquote>
+          </Tile>
+        )}
+
+        <Tile>
+          <TileLabel icon="tag">Tags</TileLabel>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {achievement.tags.map((tag) => (
+              <Chip key={tag}>{tag}</Chip>
+            ))}
+          </div>
+          {achievement.officialLink && (
+            <a
+              href={achievement.officialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+            >
+              View official results
+              <Icon name="external" className="h-4 w-4" />
+            </a>
+          )}
+        </Tile>
       </article>
-    </div>
+    </PageShell>
   );
 }
