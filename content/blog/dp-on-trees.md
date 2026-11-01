@@ -1,14 +1,11 @@
-export interface BlogDetail {
-  slug: string;
-  title: string;
-  content: string;
-}
-
-export const dpOnTreesDetails: BlogDetail = {
-  slug: 'dp-on-trees',
-  title: 'How to Think About Dynamic Programming on Trees',
-  content: `# How to Think About Dynamic Programming on Trees
-
+---
+title: "How to Think About Dynamic Programming on Trees"
+excerpt: "A comprehensive guide to the thinking process for Tree DP in competitive programming: how to decide if a problem needs Tree DP, how to invent states and transitions, when rerooting is needed, and how to debug it effectively."
+date: "2026-01-15"
+category: "Tutorial"
+tags: ["Dynamic Programming","Tree DP","Algorithms","Advanced","Competitive Programming"]
+published: true
+---
 This note is about the *thinking process* for Tree DP in competitive programming: how to decide “this is tree DP”, how to invent states/transitions, when rerooting is needed, and how to debug it.
 
 ---
@@ -56,7 +53,7 @@ Look for any of these:
 Ask:
 
 - If I cut edge (u, parent[u]), does the objective inside subtree(u) depend on nodes outside subtree(u) *only via u*?
-  - If yes, define \`dp[u]\` as “answer for subtree(u)”.
+  - If yes, define `dp[u]` as “answer for subtree(u)”.
 
 Typical independence sources:
 
@@ -76,7 +73,7 @@ Rerooting becomes necessary when the question is:
 
 Canonical symptom:
 
-- You can compute \`down[u]\` from children, but to answer for u you also need information from “above” u.
+- You can compute `down[u]` from children, but to answer for u you also need information from “above” u.
 
 ---
 
@@ -86,7 +83,7 @@ Use this checklist almost mechanically.
 
 ### Step A — Force a root and define the *direction of information*
 
-1. Pick any root \`r\` (often 1).
+1. Pick any root `r` (often 1).
 2. Think in two directions:
    - **Downward (subtree)** info: children → parent.
    - **Upward (outside subtree)** info: parent → child (used in rerooting).
@@ -115,31 +112,31 @@ Bad state signs:
 - state depends on “set of chosen nodes” explicitly
 - transitions require iterating over all nodes in subtree repeatedly
 
-### Step D — Define \`dp[u]\` in one sentence
+### Step D — Define `dp[u]` in one sentence
 
 Format:
 
-- \`dp[u] = (best/ways/cost) for subtree(u) assuming <explicit condition about u>\`
+- `dp[u] = (best/ways/cost) for subtree(u) assuming <explicit condition about u>`
 
 Examples:
 
 - Independent set:
-  - \`dp[u][0]\` = max size in subtree(u) if u is NOT taken
-  - \`dp[u][1]\` = max size in subtree(u) if u IS taken
+  - `dp[u][0]` = max size in subtree(u) if u is NOT taken
+  - `dp[u][1]` = max size in subtree(u) if u IS taken
 
 - Farthest node (like your framework):
-  - \`down[u] = best (distance, nodeId) achievable from u going only into its subtree\` (children side)
+  - `down[u] = best (distance, nodeId) achievable from u going only into its subtree` (children side)
 
 ### Step E — Determine transitions by “merge children” thinking
 
 Common merge patterns:
 
 - **Sum merge** (independent substructures):
-  - \`dp[u] += f(dp[v])\`
+  - `dp[u] += f(dp[v])`
 - **Max merge** (choose best child):
-  - \`dp[u] = max(dp[u], g(dp[v]))\`
+  - `dp[u] = max(dp[u], g(dp[v]))`
 - **Product merge** (counting independent choices):
-  - \`ways[u] *= f(ways[v])\`
+  - `ways[u] *= f(ways[v])`
 
 Always check the “independence condition”: are choices in different child subtrees independent once u’s local state is fixed? If yes, sum/product merges are valid.
 
@@ -152,11 +149,11 @@ Always check the “independence condition”: are choices in different child su
 
 You need prefix/suffix (or “two-pass best”) when:
 
-- computing \`up[v]\` for each child v needs “best contribution among all other children of u” (i.e., all children except v).
+- computing `up[v]` for each child v needs “best contribution among all other children of u” (i.e., all children except v).
 
 Symptoms:
 
-- your formula looks like: \`up[v] = combine( up[u], best over children != v )\`
+- your formula looks like: `up[v] = combine( up[u], best over children != v )`
 - naive computation would scan all siblings per child ⇒ O(sum deg(u)^2) ⇒ can become O(N^2)
 
 Prefix/suffix lets you compute “best excluding v” in O(1) per child after O(deg(u)) preprocessing.
@@ -191,7 +188,7 @@ Write it like math or pseudocode, then implement.
 
 Three checks:
 
-1. **Subproblem correctness:** does \`dp[u]\` correspond exactly to what you claim?
+1. **Subproblem correctness:** does `dp[u]` correspond exactly to what you claim?
 2. **No double counting:** each node/edge contributes exactly once.
 3. **Independence check:** once u’s local decision is fixed, do children subproblems interact? If they do, you need a bigger state.
 
@@ -205,12 +202,12 @@ Three checks:
 
 Thinking:
 
-- Define \`dp[u]\` as the desired quantity over subtree(u).
+- Define `dp[u]` as the desired quantity over subtree(u).
 - Merge children’s results with a simple operation.
 
 Example: subtree size
 
-- \`sz[u] = 1 + Σ sz[v]\`
+- `sz[u] = 1 + Σ sz[v]`
 
 ---
 
@@ -225,8 +222,8 @@ Thinking:
 
 Example: tree diameter
 
-- \`down[u] = max( down[v] + 1 )\`
-- \`diam[u] = max( max(diam[v]), best1 + best2 )\`
+- `down[u] = max( down[v] + 1 )`
+- `diam[u] = max( max(diam[v]), best1 + best2 )`
 
 ---
 
@@ -241,17 +238,17 @@ Thinking:
 
 Typical formulas:
 
-- \`sz[u] = 1 + Σ sz[v]\`
-- \`downSum[u] = Σ (downSum[v] + sz[v])\`  (sum distances from u to nodes in subtree(u))
+- `sz[u] = 1 + Σ sz[v]`
+- `downSum[u] = Σ (downSum[v] + sz[v])`  (sum distances from u to nodes in subtree(u))
 - Reroot:
-  - \`ans[v] = ans[u] + (N - 2*sz[v])\`
+  - `ans[v] = ans[u] + (N - 2*sz[v])`
 
 Reasoning behind reroot step:
 
 - When moving root from u to child v:
-  - nodes in subtree(v) become 1 closer ⇒ decrease by \`sz[v]\`
-  - all other nodes become 1 farther ⇒ increase by \`N - sz[v]\`
-  - net change: \`(N - sz[v]) - sz[v] = N - 2*sz[v]\`
+  - nodes in subtree(v) become 1 closer ⇒ decrease by `sz[v]`
+  - all other nodes become 1 farther ⇒ increase by `N - sz[v]`
+  - net change: `(N - sz[v]) - sz[v] = N - 2*sz[v]`
 
 ---
 
@@ -267,7 +264,7 @@ Thinking:
 
 Example: 2-coloring with constraint “adjacent different” (on tree it’s always 2 ways if connected), but for custom constraints you’ll do:
 
-- \`ways[u][c] = Π over children v ( Σ over allowed child colors c' of ways[v][c'] )\`
+- `ways[u][c] = Π over children v ( Σ over allowed child colors c' of ways[v][c'] )`
 
 ---
 
@@ -282,8 +279,8 @@ Thinking:
 
 Example: Maximum Independent Set (MIS)
 
-- \`dp[u][1] = 1 + Σ dp[v][0]\`  (if take u, children cannot be taken)
-- \`dp[u][0] = Σ max(dp[v][0], dp[v][1])\`
+- `dp[u][1] = 1 + Σ dp[v][0]`  (if take u, children cannot be taken)
+- `dp[u][0] = Σ max(dp[v][0], dp[v][1])`
 
 ---
 
@@ -295,43 +292,43 @@ Subtree DP gives you answers that only see descendants.
 
 If you need “best over the entire tree from node u” (farthest node, best path, total distance, etc.), you must incorporate information from outside subtree(u).
 
-### Why \`up[]\` is needed
+### Why `up[]` is needed
 
 Define:
 
-- \`down[u]\` = best summary from u into its children/subtree
-- \`up[u]\` = best summary from u going to the parent side (everything outside subtree(u))
+- `down[u]` = best summary from u into its children/subtree
+- `up[u]` = best summary from u going to the parent side (everything outside subtree(u))
 
 Then:
 
-- full answer at u = \`combine(down[u], up[u])\`
+- full answer at u = `combine(down[u], up[u])`
 
-### How to derive \`up\` transition formula
+### How to derive `up` transition formula
 
 General derivation for a child v of u:
 
 - Anything outside subtree(v) that v can reach must go through u.
-- So \`up[v]\` is basically “best from u that does NOT go into v’s subtree”, then +1 edge to move from v to u.
+- So `up[v]` is basically “best from u that does NOT go into v’s subtree”, then +1 edge to move from v to u.
 
 Template:
 
 1. Candidate from above u:
-   - \`candidate1 = up[u]\` (then adjust for edge)
+   - `candidate1 = up[u]` (then adjust for edge)
 2. Candidate from siblings:
-   - \`candidate2 = bestAmongChildrenExceptV( down[child] + 1 )\` (from u’s perspective)
+   - `candidate2 = bestAmongChildrenExceptV( down[child] + 1 )` (from u’s perspective)
 3. Combine candidates at u and push to v with +1.
 
 ### Why prefix/suffix trick is required
 
-To compute \`bestAmongChildrenExceptV\` efficiently for every v.
+To compute `bestAmongChildrenExceptV` efficiently for every v.
 
 - Naive: for each child v, scan all other children ⇒ O(deg(u)^2)
 - Prefix/suffix: compute best prefix and best suffix arrays over children contributions ⇒ O(deg(u)) total per u
 
 **Your existing code** in [classic_dp_on_tree_framework.cpp](classic_dp_on_tree_framework.cpp) does a variant of this with two passes:
 
-- left-to-right tracking a \`best\`
-- right-to-left tracking another \`best\`
+- left-to-right tracking a `best`
+- right-to-left tracking another `best`
 
 This is the same idea as prefix/suffix without explicit arrays.
 
@@ -382,7 +379,7 @@ Use tiny trees where you can enumerate answers:
 For 3–6 nodes:
 
 - Write down dp values bottom-up.
-- For rerooting, compute \`up\` by hand for one child and verify formula.
+- For rerooting, compute `up` by hand for one child and verify formula.
 - Confirm tie-breaking rules (e.g., maximum value then maximum node id).
 
 ### Common logical mistakes
@@ -391,7 +388,7 @@ For 3–6 nodes:
 - Mixing meanings of dp states (e.g., dp[u] “includes u” vs “subtree size”).
 - Wrong +1 / +2 edge increments when moving across u.
 - In rerooting: using child contribution that still includes that child (not excluding v).
-- Not initializing \`up[root]\` properly.
+- Not initializing `up[root]` properly.
 - Tie-breaking inconsistencies (pair ordering, custom comparator).
 
 ---
@@ -402,26 +399,26 @@ For 3–6 nodes:
 
 Tree (1-indexed):
 
-\`\`\`
+```
 1-2
 |
 3
 |
 4
-\`\`\`
+```
 
 Thinking:
 
 - For each u, the farthest node might be in one of its child subtrees (down), or via its parent side (up).
 - Define:
-  - \`down[u] = best (distance, nodeId) going into children\`
-  - \`up[u]   = best (distance, nodeId) going to parent side\`
-- Answer per node: \`max(down[u], up[u])\` with tie-breaking by node id.
+  - `down[u] = best (distance, nodeId) going into children`
+  - `up[u]   = best (distance, nodeId) going to parent side`
+- Answer per node: `max(down[u], up[u])` with tie-breaking by node id.
 
 Your code does:
 
-- \`dfs1\` computes \`down[u]\` via children.
-- \`dfs2\` computes \`up[child]\` using \`up[u]\` and best siblings, using two passes (prefix/suffix idea).
+- `dfs1` computes `down[u]` via children.
+- `dfs2` computes `up[child]` using `up[u]` and best siblings, using two passes (prefix/suffix idea).
 
 Key mental model:
 
@@ -433,18 +430,18 @@ Key mental model:
 
 Small tree:
 
-\`\`\`
+```
   1
  / \
 2   3
     |
     4
-\`\`\`
+```
 
 States:
 
-- \`dp[u][1]\`: max nodes selected in subtree(u) if u selected
-- \`dp[u][0]\`: max nodes selected in subtree(u) if u not selected
+- `dp[u][1]`: max nodes selected in subtree(u) if u selected
+- `dp[u][0]`: max nodes selected in subtree(u) if u not selected
 
 Transitions:
 
@@ -459,15 +456,15 @@ This is a pure subtree DP (no rerooting) unless the problem asks “answer if ro
 
 Small path:
 
-\`\`\`
+```
 1 - 2 - 3 - 4
-\`\`\`
+```
 
 Compute:
 
-- \`sz[u]\` and \`downSum[u]\` by DFS from root 1.
-- \`ans[root] = downSum[root]\`.
-- reroot using \`ans[v] = ans[u] + (N - 2*sz[v])\`.
+- `sz[u]` and `downSum[u]` by DFS from root 1.
+- `ans[root] = downSum[root]`.
+- reroot using `ans[v] = ans[u] + (N - 2*sz[v])`.
 
 Mental check:
 
@@ -479,7 +476,7 @@ Mental check:
 
 ### Template 1 — Basic subtree DP (single DFS)
 
-\`\`\`cpp
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -512,13 +509,13 @@ int main() {
     sz.assign(n + 1, 0);
     dfs(1, 0);
 }
-\`\`\`
+```
 
 ### Template 2 — Rerooting skeleton (down + up)
 
 Use this when you need answer for every node.
 
-\`\`\`cpp
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -609,11 +606,11 @@ int main() {
         // cout << ans.first << " " << ans.second << "\n";
     }
 }
-\`\`\`
+```
 
 ### Template 3 — Include/Exclude DP (adjacency constraint)
 
-\`\`\`cpp
+```cpp
 // Example: maximum independent set size
 vector<array<long long,2>> dp; // dp[u][0/1]
 
@@ -627,7 +624,7 @@ void dfs(int u, int p) {
         dp[u][0] += max(dp[v][0], dp[v][1]);
     }
 }
-\`\`\`
+```
 
 ---
 
@@ -636,8 +633,8 @@ void dfs(int u, int p) {
 - If the problem says **tree** + asks for a value that can be computed by **combining children subanswers** → consider Tree DP.
 - If cutting an edge makes the problem split into **independent components** → Tree DP is natural.
 - If the output is **for every node** (answer from each node’s perspective) → likely **rerooting**.
-- If answer at u needs info “from the parent side” → define \`up[u]\` (rerooting).
-- If \`up[child]\` needs “best over all siblings except this child” → use **prefix/suffix** or **top-2** trick.
+- If answer at u needs info “from the parent side” → define `up[u]` (rerooting).
+- If `up[child]` needs “best over all siblings except this child” → use **prefix/suffix** or **top-2** trick.
 - If your transition scans all siblings for each child → you’re drifting to **O(N^2)** (optimize).
 - If constraints are adjacency-based (taken/not taken, color constraints) → start with **multi-state include/exclude** DP.
 - If you need “best path” or “diameter” → track **best downward** (often top-2) and optionally reroot.
@@ -645,7 +642,3 @@ void dfs(int u, int p) {
 ---
 
 If you want, I can also adapt your existing [classic_dp_on_tree_framework.cpp](classic_dp_on_tree_framework.cpp) into a more reusable “library-style” template (same logic, less problem-specific), but I didn’t change any code since you asked specifically for the study note.
-`,
-};
-
-export default dpOnTreesDetails;
