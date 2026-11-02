@@ -54,6 +54,7 @@ export async function generateMetadata({
   return {
     title: `${achievement.title} - Istahak Islam`,
     description: achievement.description,
+    alternates: { canonical: `/achievements/${slug}` },
   };
 }
 

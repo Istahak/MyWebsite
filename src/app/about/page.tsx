@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "About - Istahak Islam",
   description:
     "Learn more about Istahak Islam's background, completed CSE education, software engineering role at Enosis Solutions BD, and competitive programming journey.",
+  alternates: { canonical: "/about" },
 };
 
 const currentStack = [

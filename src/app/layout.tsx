@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { siteUrl } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,6 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Istahak's Portfolio",
   description:
     "Portfolio of Istahak Islam, a Software Engineer at Enosis Solutions BD and CSE graduate from University of Dhaka, showcasing projects and competitive programming achievements.",

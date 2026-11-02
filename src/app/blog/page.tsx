@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Technical blog posts about competitive programming, algorithms, data structures, and software development.",
   alternates: {
+    canonical: "/blog",
     types: { "application/rss+xml": "/rss.xml" },
   },
 };
