@@ -17,6 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  verification: { google: "u87y1bu6v3T3jzJOlCkmPLuP1jCoqfZpxXTpt8t9NO8" },
   title: "Istahak's Portfolio",
   description:
     "Portfolio of Istahak Islam, a Software Engineer at Enosis Solutions BD and CSE graduate from University of Dhaka, showcasing projects and competitive programming achievements.",
