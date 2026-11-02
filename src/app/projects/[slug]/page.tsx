@@ -43,6 +43,7 @@ export async function generateMetadata({
     title: `${project.title} - Istahak Islam`,
     description: project.description,
     keywords: project.tech.join(", "),
+    alternates: { canonical: `/projects/${slug}` },
   };
 }
 

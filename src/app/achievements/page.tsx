@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Achievements - Istahak Islam",
   description:
     "Explore Istahak Islam's competitive programming achievements, contest performances, and awards from various national and international competitions.",
+  alternates: { canonical: "/achievements" },
 };
 
 const RING_RADIUS = 26;

@@ -8,6 +8,8 @@ import { tagSlug } from "@/lib/tags";
 import TableOfContents from "@/components/blog/TableOfContents";
 import { Icon } from "@/components/ui/Icon";
 import { Chip, PageShell, Tile, TileLabel } from "@/components/ui/Tile";
+import JsonLd from "@/components/JsonLd";
+import { siteUrl } from "@/lib/site";
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
@@ -36,9 +38,11 @@ export async function generateMetadata({
     description: post.excerpt,
     keywords: post.tags.join(", "),
     authors: [{ name: "Istahak Islam" }],
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url: `/blog/${slug}`,
       type: "article",
       publishedTime: post.date,
       authors: ["Istahak Islam"],
@@ -77,6 +81,19 @@ export default async function BlogPost({ params }: BlogPageProps) {
 
   return (
     <PageShell width="max-w-7xl">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          keywords: post.tags.join(", "),
+          url: `${siteUrl}/blog/${slug}`,
+          image: `${siteUrl}/blog/${slug}/opengraph-image`,
+          author: { "@type": "Person", name: "Istahak Islam", url: siteUrl },
+        }}
+      />
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12">
         <div className="mx-auto w-full max-w-[60rem]">
           <header className="mb-8">
