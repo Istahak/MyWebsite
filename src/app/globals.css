@@ -127,6 +127,71 @@ html {
   border-radius: 0.75rem;
 }
 
+/* A long display formula scrolls inside its own box instead of pushing the page sideways on phones. */
+.blog-prose .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Inline SVG diagrams draw with currentColor, so one drawing works in light and dark mode. */
+.blog-prose .diagram svg {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+  height: auto;
+  margin: 0 auto;
+}
+
+.blog-prose .diagram text {
+  fill: currentColor;
+  /* @theme inline does not emit --font-mono as a variable, so use the next/font one directly. */
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 16px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.blog-prose .diagram .note {
+  font-size: 14px;
+  fill-opacity: 0.75;
+}
+
+.blog-prose .diagram .start {
+  text-anchor: start;
+}
+
+.blog-prose .diagram .edge,
+.blog-prose .diagram .arrow {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.blog-prose .diagram .edge {
+  stroke-opacity: 0.4;
+}
+
+.blog-prose .diagram .node {
+  fill: var(--background);
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.blog-prose .diagram .down {
+  fill: rgb(99 102 241 / 0.2);
+  stroke: #6366f1;
+}
+
+.blog-prose .diagram .up {
+  fill: rgb(217 70 239 / 0.18);
+  stroke: #d946ef;
+}
+
+.blog-prose .diagram .skip {
+  stroke-dasharray: 4 4;
+  stroke-opacity: 0.5;
+}
+
 .dark {
   /* The light values above are unlayered, so they beat prose-invert; restate them here. */
   .blog-prose {
