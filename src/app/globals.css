@@ -192,6 +192,150 @@ html {
   stroke-opacity: 0.5;
 }
 
+/* Lesson widgets written as raw HTML in posts. Colors use alpha so one rule works in light and dark mode. */
+.blog-prose .roadmap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: 0.6rem;
+  margin: 1.5em 0;
+}
+
+.blog-prose .roadmap a {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgb(127 127 127 / 0.3);
+  border-radius: 0.75rem;
+  color: inherit;
+  line-height: 1.4;
+}
+
+.blog-prose .roadmap a:hover {
+  border-color: #6366f1;
+  text-decoration: none;
+}
+
+.blog-prose .roadmap b {
+  display: block;
+  color: #6366f1;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+}
+
+.blog-prose .roadmap small {
+  display: block;
+  opacity: 0.7;
+}
+
+.blog-prose .chat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1.5em 0;
+  padding: 1rem;
+  border: 1px solid rgb(127 127 127 / 0.3);
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.blog-prose .msg {
+  max-width: 85%;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid;
+  border-radius: 0.75rem;
+}
+
+.blog-prose .msg .role {
+  display: block;
+  font-family: var(--font-jetbrains-mono), var(--font-bengali), monospace;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.blog-prose .msg.system {
+  align-self: stretch;
+  max-width: none;
+  border: 1px dashed rgb(127 127 127 / 0.6);
+}
+
+.blog-prose .msg.user {
+  align-self: flex-end;
+  background: rgb(99 102 241 / 0.15);
+  border-color: rgb(99 102 241 / 0.45);
+}
+
+.blog-prose .msg.assistant {
+  align-self: flex-start;
+  background: rgb(217 70 239 / 0.1);
+  border-color: rgb(217 70 239 / 0.4);
+}
+
+.blog-prose .msg.tool {
+  align-self: flex-start;
+  background: rgb(16 185 129 / 0.1);
+  border-color: rgb(16 185 129 / 0.45);
+  font-family: var(--font-jetbrains-mono), var(--font-bengali), monospace;
+  font-size: 0.85rem;
+}
+
+.blog-prose .tokens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.75em 0;
+  font-family: var(--font-jetbrains-mono), var(--font-bengali), monospace;
+  font-size: 0.95rem;
+}
+
+.blog-prose .tokens > b {
+  min-width: 6.5rem;
+  font-family: var(--font-inter), var(--font-bengali), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.blog-prose .tokens > i {
+  width: 0.75rem;
+}
+
+.blog-prose .tokens span {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.35rem;
+  white-space: pre;
+}
+
+.blog-prose .tokens span:nth-of-type(5n + 1) { background: rgb(99 102 241 / 0.22); }
+.blog-prose .tokens span:nth-of-type(5n + 2) { background: rgb(217 70 239 / 0.2); }
+.blog-prose .tokens span:nth-of-type(5n + 3) { background: rgb(16 185 129 / 0.22); }
+.blog-prose .tokens span:nth-of-type(5n + 4) { background: rgb(245 158 11 / 0.25); }
+.blog-prose .tokens span:nth-of-type(5n + 5) { background: rgb(14 165 233 / 0.22); }
+
+.blog-prose .tokens small {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.blog-prose details.quiz {
+  margin: 1em 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(127 127 127 / 0.3);
+  border-radius: 0.75rem;
+}
+
+.blog-prose details.quiz summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.blog-prose details.quiz > :last-child {
+  margin-bottom: 0;
+}
+
 .dark {
   /* The light values above are unlayered, so they beat prose-invert; restate them here. */
   .blog-prose {
