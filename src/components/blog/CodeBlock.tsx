@@ -7,7 +7,8 @@ export default function CodeBlock(props: ComponentProps<"pre">) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
-    await navigator.clipboard.writeText(preRef.current?.innerText ?? "");
+    // rehype-pretty-code renders an empty line as a single space; copy it back as empty.
+    await navigator.clipboard.writeText((preRef.current?.innerText ?? "").replace(/^ $/gm, ""));
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };

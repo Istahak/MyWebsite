@@ -353,19 +353,22 @@ html {
   opacity: 0.75;
 }
 
-.blog-prose details.quiz {
+.blog-prose details.quiz,
+.blog-prose details.file {
   margin: 1em 0;
   padding: 0.75rem 1rem;
   border: 1px solid rgb(127 127 127 / 0.3);
   border-radius: 0.75rem;
 }
 
-.blog-prose details.quiz summary {
+.blog-prose details.quiz summary,
+.blog-prose details.file summary {
   cursor: pointer;
   font-weight: 600;
 }
 
-.blog-prose details.quiz > :last-child {
+.blog-prose details.quiz > :last-child,
+.blog-prose details.file > :last-child {
   margin-bottom: 0;
 }
 
